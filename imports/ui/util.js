@@ -59,7 +59,7 @@ export function extractMarkdownFromHTML() {
 }
 
 export function extractMarkdownFromHTML_new(aux) {
-  alert("---");
+
   let text = aux;
   const lines = text.split("\n");
   let leadingSpaces;

@@ -187,3 +187,10 @@ export function render(notebook) {
     rendered += renderBody(notebook.get('blocks'), notebook.get('content'));
     return rendered;
 }
+
+export function renderString(notebook) {
+  let rendered = "";
+  rendered += renderMetadata(notebook.get('metadata'));
+  rendered += renderBody(notebook.get('blocks'), notebook.get('content'));
+  return rendered;
+}

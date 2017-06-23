@@ -6,6 +6,8 @@ import { render } from '../markdown';
 import { toggleSave } from '../actions';
 import { renderHTML } from '../util';
 import { saveGist } from '../actions';
+import documentEditor from '../../modules/document-editor.js';
+import handleUpsert from '../../modules/document-editor.js';
 
 class SaveDialog extends Component {
 
@@ -15,6 +17,7 @@ class SaveDialog extends Component {
         this.getCssClass = this.getCssClass.bind(this);
         this.setMode = this.setMode.bind(this);
         this.state = {mode: 'md'};
+        documentEditor({ component: this });
     }
 
     close() {

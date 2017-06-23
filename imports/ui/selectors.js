@@ -16,7 +16,7 @@ export const contentSelector = state => {
 };
 
 export const editorSelector = state => {
-    return state.editor.toJS();
+    return {edit: state.editor.toJS(), notebook: state.notebook};
 };
 
 export const saveSelector = state => {

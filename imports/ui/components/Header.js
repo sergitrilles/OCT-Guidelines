@@ -32,6 +32,9 @@ class Header extends Component {
         const title = metadata.get('title');
         const icon = editable ? "fa-newspaper-o" : "fa-pencil";
         document.title = title;
+        if(editable) {
+          this.toggleEditClicked();
+        }
         const saveButton = (
             <i className="fa fa-save" onClick={this.toggleSaveClicked}
                 title="Export notebook">
@@ -45,13 +48,7 @@ class Header extends Component {
         return (
             <div>
                 <Title title={title} editable={editable} dispatch={dispatch} />
-                <span className="controls">
-                    {changesMade ? undoButton : null}
-                    {changesMade ? saveButton : null}
-                    <i className={'fa ' + icon} onClick={this.toggleEditClicked}
-                        title={editable ? "Exit edit mode" : "Enter edit mode"}>
-                    </i>
-                </span>
+
                 <Metadata editable={editable} metadata={metadata} dispatch={dispatch} />
             </div>
         );

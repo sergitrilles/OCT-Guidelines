@@ -17,6 +17,8 @@ import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
 
+import SaveDialog from './SaveDialog';
+
 import { ReactiveVar } from 'meteor/reactive-var';
 
 
@@ -32,25 +34,27 @@ class DocumentEditor extends React.Component {
 
 
   componentDidMount() {
-    documentEditor({ component: this });
 
-    setTimeout(() => { document.querySelector('[name="title"]').focus(); }, 0);
+    documentEditor({ component: this });
+    //setTimeout(() => { document.querySelector('[name="title"]').focus(); }, 0);
+    this.props.dispatch(fetchData());
   }
 
   constructor(props) {
     super(props);
+    const { notebook } = this.props;
+    this.deselectBlocks = this.deselectBlocks.bind(this);
   }
 
-  submit(e){
-
-    alert(parse(aux));
-    e.preventDefault();
-    handleUpsert({component: this},{param:parse(aux)});
-    //documentEditor({ component: this },{param: parse(aux)});
-    alert('it works!');
-    this.props.dispatch(loadMarkdownFromDB(parse(doc.body)));
+  edit()
+  {
+    documentEditor({ component: this });
   }
 
+
+  deselectBlocks() {
+    this.props.dispatch(editBlock(null));
+  }
 
   componentWillMount() {
     const { doc } = this.props;
@@ -80,54 +84,68 @@ class DocumentEditor extends React.Component {
   */
 
     //doc.body = parse(aux);
-    alert(doc.body);
+    //alert(doc.body);
     this.props.dispatch(loadMarkdownFromDB(parse(doc.body)));
 
   }
 
 
 
-  render() {
+   submit(e,notebook){
 
+   e.preventDefault();
+   handleUpsert(notebook);
+   //documentEditor({ component: this },{param: parse(aux)});
+
+
+   }
+
+
+
+  render() {
+    editable = true;
+    const {  saving, activeBlock } = this.props.edit;
+    const cssClass = editable ? ' editable' : '';
+    const { notebook } = this.props;
+
+    stateGlobal = notebook;
     const { doc } = this.props;
     //const sampleNotebook = parse(doc.body);
-    alert(doc.body);
+    //alert(doc.body);
+    //const editable = true;
     const metadata = parse(doc.body).get('metadata');
+
+
+    const notebookView = (
+      <div className={'pure-u-1 pure-u-md-3-4 pure-u-lg-2-3' + cssClass}>
+        <Header editable={editable} />
+        <hr className="top-sep"></hr>
+        <Content editable={editable} activeBlock={activeBlock} />
+        <Footer />
+      </div>
+    );
+
+
+
+
+    const content = saving ? saveView : notebookView;
 
     return (
 
+
+
       <form
         ref={ form => (this.documentEditorForm = form) }
-        onSubmit={this.submit}
+        onSubmit={  event => event.preventDefault() }
       >
 
-        <FormGroup>
-          <ControlLabel>Title</ControlLabel>
-          <FormControl
-            type="text"
-            name="title"
-            defaultValue={ doc && doc.title }
-            placeholder="Oh, The Places You'll Go!"
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Guideline</ControlLabel>
-          <FormControl
-            type="text"
-            name="body"
-            defaultValue={ doc && doc.body }
-            placeholder="Oh, The Places You'll Go!"
-          />
-
-        </FormGroup>
+        <div className="pure-g" onClick={this.deselectBlocks}>
+          <div className="offset-col pure-u-1 pure-u-md-1-8 pure-u-lg-1-6">
+            &nbsp;
+          </div>
+          {content}
 
 
-        <div className={'pure-u-1 pure-u-md-3-4 pure-u-lg-2-3' + 'editable'}>
-          <Header editable={true}  />
-          <hr className="top-sep"></hr>
-          <Content editable={true} />
-          <Footer metadata={metadata} />
         </div>
         <Button type="submit" bsStyle="success">
           { doc && doc._id ? 'Save Changes' : 'Add Guideline' }

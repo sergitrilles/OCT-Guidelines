@@ -7,38 +7,44 @@ import './validation.js';
 import { Meteor } from 'meteor/meteor';
 import fm from 'front-matter';
 import { parse, render, updateTitle } from './../ui/markdown';
+import { getStateGuideline, loadMarkdownFromDB, loadMarkdown, fetchData, editBlock } from './../ui/actions';
+
 
 let component;
+
+
 const handleUpsert = () => {
-  alert("soyyo");
   const { doc } = component.props;
-  alert(aux);
+  //const { notebook } = component.props.notebook;
   confirmation = "";
-  state = parse(aux);
-  text = render(state);
-  alert(text);
+  url = "";
 
   if (doc && doc._id){
+    var bodyContent;
+    auxState = render(stateGlobal);
+    const metadata = stateGlobal.get('metadata');
+    const title = metadata.get('title');
+
     confirmation =  'Document updated!' ;
     upsert = {
-      title: document.querySelector('[name="title"]').value.trim(),
-      body: doc.body,
-      published: false,
-      owner: Meteor.userId(),
+      title: title,
+      body: auxState,
+      published: doc.published,
+      owner: doc.owner,
     };
   }
   else{
+    url = "edit";
     confirmation = 'Document added!';
-    auxState = updateTitle(parse(aux),document.querySelector('[name="title"]').value.trim())
-
-
-    alert(render(auxState));
+    auxState = updateTitle(parse(aux),document.querySelector('[name="title"]').value.trim());
+    //alert(render(notebook));
     upsert = {
       title: document.querySelector('[name="title"]').value.trim(),
       body: render(auxState),
       published: false,
       owner: Meteor.userId(),
     };
+
   }
 
   if (doc && doc._id) upsert._id = doc._id;
@@ -50,9 +56,10 @@ const handleUpsert = () => {
     } else {
       component.documentEditorForm.reset();
       Bert.alert(confirmation, 'success');
-      browserHistory.push(`/documents/${response.insertedId || doc._id}`);
+      browserHistory.push(`/documents/${response.insertedId || doc._id}/`+url);
     }
   });
+  //loadMarkdownFromDB(parse(doc.body));
 };
 
 const validate = () => {

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import DocumentNewEditor from '../components/DocumentNewEditor.js';
 
 const NewDocument = () => (
@@ -8,4 +10,10 @@ const NewDocument = () => (
   </div>
 );
 
+NewDocument.propTypes = {
+  doc: PropTypes.object,
+};
+
 export default NewDocument;
+
+

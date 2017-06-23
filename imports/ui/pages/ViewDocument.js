@@ -61,7 +61,6 @@ const handleUnpublish = (_id) => {
 };
 
 const ViewDocument = ({ doc }) => {
-
   const sampleNotebook = parse(doc.body);
   const metadata = sampleNotebook.get('metadata');
   if(Meteor.userId() == doc.owner){
@@ -79,10 +78,12 @@ const ViewDocument = ({ doc }) => {
             </ButtonToolbar>
           </div>
           <div className={'pure-u-1 pure-u-md-3-4 pure-u-lg-2-3' + 'editable'}>
-            <Header editable={false} metadata={metadata} />
-            <hr className="top-sep"></hr>
-            <Content test={sampleNotebook} editable={false} />
-            <Footer metadata={metadata} />
+            <div className="ViewDocument">
+              <div className="page-header clearfix">
+                <h4 className="pull-left">{ doc && doc.title }</h4>
+              </div>
+              <MarkdownRenderer markdown={doc.body} />
+            </div>
           </div>
         </div>
       ) : <NotFound />;
@@ -105,6 +106,7 @@ ViewDocument.propTypes = {
 
 export default container((props, onData) => {
   const documentId = props.params._id;
+
   const subscription = Meteor.subscribe('documents.view', documentId);
 
   if (subscription.ready()) {

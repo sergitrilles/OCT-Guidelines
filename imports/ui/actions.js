@@ -12,6 +12,7 @@ import { gistUrl, gistApi } from './config';
  * Action types
  */
 export const LOAD_STATE = 'LOAD_STATE';
+export const GET_STATE = 'GET_STATE';
 export const LOAD_MARKDOWN = 'LOAD_MARKDOWN';
 export const CODE_EXECUTED = 'CODE_EXECUTED';
 export const CODE_ERROR = 'CODE_ERROR';
@@ -74,6 +75,13 @@ export function loadMarkdown() {
         };
     }
     return loadMarkdownFromHTML();
+}
+
+export function getStateGuideline(body) {
+  return {
+    type: GET_STATE,
+    text: body
+  };
 }
 
 
@@ -397,7 +405,5 @@ export function editBlock(id) {
 export const addItem = item => ({ type: ADD_ITEM, item });
 export const updateItem = item => ({ type: UPDATE_ITEM, item });
 export const deleteItem = item => ({ type: DELETE_ITEM, item });
-
 export const resetAll = () => ({ type: RESET_ALL });
-
 export const setDate = date => ({ type: SET_DATE, date });
