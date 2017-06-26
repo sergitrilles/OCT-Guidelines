@@ -36,7 +36,12 @@ const handleUpsert = () => {
   else{
     url = "edit";
     confirmation = 'Document added!';
-    auxState = updateTitle(parse(aux),document.querySelector('[name="title"]').value.trim());
+
+    const user = Meteor.user();
+    const name = user && user.profile ? user.profile.name : '';
+    nameSurname = name.first + " " + name.last;
+
+    auxState = updateTitle(parse(aux),document.querySelector('[name="title"]').value.trim(), nameSurname);
     //alert(render(notebook));
     upsert = {
       title: document.querySelector('[name="title"]').value.trim(),
@@ -44,7 +49,6 @@ const handleUpsert = () => {
       published: false,
       owner: Meteor.userId(),
     };
-
   }
 
   if (doc && doc._id) upsert._id = doc._id;

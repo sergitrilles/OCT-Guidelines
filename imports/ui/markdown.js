@@ -108,13 +108,13 @@ export function parse(md) {
     });
 }
 
-export function updateTitle(state, title){
+export function updateTitle(state, title, name){
   const metadata = state.get('metadata');
   return Immutable.fromJS({
     metadata: {
       title: title,
-      created: metadata.get('created'),
-      author: Meteor.userId(),
+      created: Date(),
+      author: name,
       datasources: metadata.get('datasources'),
       original: metadata.get('original'),
       showFooter: metadata.get('showFooter')

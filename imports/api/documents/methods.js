@@ -43,10 +43,12 @@ export const publishDocument = new ValidatedMethod({
 export const unpublishDocument = new ValidatedMethod({
   name: 'documents.unpublished',
   validate: new SimpleSchema({
-    _id: { type: String },
+    _id: { type: String, optional: true },
   }).validator(),
-  run(document) {
-    return Documents.upsert({ _id: document._id }, { $set: {published: false }});
+  run({_id}) {
+    const documentToUpdate = Documents.findOne(_id);
+    documentToUpdate.published = false;
+    return Documents.upsert({ _id: documentToUpdate._id }, { $set: documentToUpdate });
   },
 });
 

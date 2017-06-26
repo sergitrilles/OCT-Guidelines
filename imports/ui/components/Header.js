@@ -48,7 +48,9 @@ class Header extends Component {
         return (
             <div>
                 <Title title={title} editable={editable} dispatch={dispatch} />
-
+                <span className="controls">
+                    {changesMade ? undoButton : null}
+                </span>
                 <Metadata editable={editable} metadata={metadata} dispatch={dispatch} />
             </div>
         );

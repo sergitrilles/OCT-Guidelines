@@ -41,6 +41,22 @@ const handleEdit = (_id) => {
   browserHistory.push(`/documents/${_id}/edit`);
 };
 
+handleExport
+
+
+const handleExport = (_id) => {
+
+    publishDocument.call({ _id }, (error) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger');
+      } else {
+        Bert.alert('Document published!', 'success');
+        browserHistory.push('/documents');
+      }
+    });
+
+};
+
 const handleRemove = (_id) => {
   if (confirm('Are you sure? This is permanent!')) {
     removeDocument.call({ _id }, (error) => {
@@ -79,6 +95,8 @@ const handleUnpublish = (_id) => {
     });
   }
 };
+
+
 
 class DocumentEditor extends React.Component {
 
@@ -190,48 +208,52 @@ class DocumentEditor extends React.Component {
 
     view = "";
 
-    if(Meteor.userId() == doc.owner){
-       view = (
-    <div>
 
-      <div className="ViewDocument">
-          <div className="page-header clearfix">
-            <h4 className="pull-left">{ doc && doc.title }</h4>
-            <ButtonToolbar className="pull-right">
-              <ButtonGroup bsSize="small">
-                <Button onClick={ () => handleEdit(doc._id) }>Edit</Button>
-                <Button onClick={ () => handlePublish(doc._id) }>Publish</Button>
-                <Button onClick={ () => handleUnpublish(doc._id) }>Unpublish</Button>
-                <Button onClick={ () => handleRemove(doc._id) } className="text-danger">Delete</Button>
-              </ButtonGroup>
-            </ButtonToolbar>
+
+
+    if(Meteor.userId() == doc.owner){
+
+      var publishButton = doc.published ? <Button onClick={ () => handleUnpublish(doc._id) }>Unpublish</Button> : <Button onClick={ () => handlePublish(doc._id) }>Publish</Button>;
+      view = (
+        <div>
+
+          <div className="ViewDocument">
+            <div className="page-header clearfix">
+              <h4 className="pull-left">{ doc && doc.title }</h4>
+              <ButtonToolbar className="pull-right">
+                <ButtonGroup bsSize="small">
+                  <Button onClick={ () => handleEdit(doc._id) }>Edit</Button>
+                  {publishButton}
+                  <Button onClick={ () => handleRemove(doc._id) } className="text-danger">Delete</Button>
+                  <Button onClick={ () => handleExport(doc._id) } className="text-danger">Export</Button>
+                </ButtonGroup>
+              </ButtonToolbar>
+            </div>
+          </div>
+          <div className="ViewDocument">
+
+            <Header editable={editable} />
+            <hr className="top-sep"></hr>
+            <Content editable={editable} activeBlock={activeBlock} />
+            <Footer />
+
           </div>
         </div>
-            <div className="ViewDocument">
 
-                <Header editable={editable} />
-                <hr className="top-sep"></hr>
-                <Content editable={editable} activeBlock={activeBlock} />
-                <Footer />
-
-            </div>
-    </div>
-
-       )
+      )
     }
     else{
-       view = (
+      view = (
         <div className="ViewDocument">
 
-            <Header editable={false} />
-            <hr className="top-sep"></hr>
-            <Content editable={false} activeBlock={activeBlock} />
-            <Footer />
+          <Header editable={false} />
+          <hr className="top-sep"></hr>
+          <Content editable={false} activeBlock={activeBlock} />
+          <Footer />
 
         </div>
       )
     }
-
 
     return (
 
@@ -240,7 +262,6 @@ class DocumentEditor extends React.Component {
             &nbsp;
           </div>
           {view}
-
 
         </div>
     )

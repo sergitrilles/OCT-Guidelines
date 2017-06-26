@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Documents from '../documents';
-import  Future  from 'fibers/future';
 
 Meteor.publish('documents.list', () => Documents.find());
 
@@ -12,6 +11,15 @@ Meteor.publish('documents.view', (_id) => {
 
 Meteor.methods({
   getFile : function(){
+
+    var file = Assets.getText('sampleNotebook.md');
+
+    return file;
+  }
+});
+/*
+Meteor.methods({
+  getFile : function(){
       this.unblock();
       var future = new Future();
       var file = Assets.getText('sampleNotebook.md');
@@ -20,3 +28,4 @@ Meteor.methods({
       return future.wait();
   }
 });
+*/
