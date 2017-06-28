@@ -28,6 +28,8 @@ import { render } from 'react-dom';
 
 import Immutable from 'immutable';
 
+import FileSaver from 'filesaver.js';
+
 import { loadMarkdownFromDB, loadMarkdown, fetchData, editBlock } from './../actions';
 import { connect } from 'react-redux';
 import { editorSelector } from './../selectors';
@@ -41,20 +43,12 @@ const handleEdit = (_id) => {
   browserHistory.push(`/documents/${_id}/edit`);
 };
 
-handleExport
 
 
-const handleExport = (_id) => {
-
-    publishDocument.call({ _id }, (error) => {
-      if (error) {
-        Bert.alert(error.reason, 'danger');
-      } else {
-        Bert.alert('Document published!', 'success');
-        browserHistory.push('/documents');
-      }
-    });
-
+const handleExport = (markdown) => {
+  const file = renderString(markdown);
+  var blob = new Blob([file], {type: "text/plain;charset=utf-8"});
+  FileSaver.saveAs(blob, "export.md");
 };
 
 const handleRemove = (_id) => {
@@ -225,7 +219,8 @@ class DocumentEditor extends React.Component {
                   <Button onClick={ () => handleEdit(doc._id) }>Edit</Button>
                   {publishButton}
                   <Button onClick={ () => handleRemove(doc._id) } className="text-danger">Delete</Button>
-                  <Button onClick={ () => handleExport(doc._id) } className="text-danger">Export</Button>
+                  <Button onClick={ () => handleExport(notebook) } className="text-danger">Export</Button>
+                  <Button onClick={ () => handleImport(notebook) } className="text-danger">Import</Button>
                 </ButtonGroup>
               </ButtonToolbar>
             </div>

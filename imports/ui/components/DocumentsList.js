@@ -9,12 +9,18 @@ import container from '../../modules/container';
 import { parse } from './../markdown';
 
 
+import { Row, Col } from 'react-bootstrap';
+//import { AddDocument } from '../components/add-document.js';
+import { Grid } from 'react-bootstrap';
+
+
 const handleNav = _id => browserHistory.push(`/documents/${_id}`);
 
 const DocumentsList = ({ documents }) => (
 
   documents.length > 0 ? <ListGroup className="DocumentsList">
       {documents.map(({ _id, title, owner, body }) => (
+
 
         Meteor.userId() == owner ?
 
