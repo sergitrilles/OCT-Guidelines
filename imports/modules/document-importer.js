@@ -13,18 +13,20 @@ import { getStateGuideline, loadMarkdownFromDB, loadMarkdown, fetchData, editBlo
 let component;
 
 
-const handleUpsert = () => {
+export function handleImporter (options){
+  component = options.component;
+  alert("kk");
   const { doc } = component.props;
   //const { notebook } = component.props.notebook;
   confirmation = "";
   url = "";
-
+  alert("1");
   if (doc && doc._id){
     var bodyContent;
-    auxState = render(stateGlobal);
-    const metadata = stateGlobal.get('metadata');
+    auxState = render(component.notebook);
+    const metadata = component.notebook.get('metadata');
     const title = metadata.get('title');
-
+    alert("2");
     confirmation =  'Document updated!' ;
     upsert = {
       title: title,
@@ -36,28 +38,15 @@ const handleUpsert = () => {
   else{
     url = "edit";
     confirmation = 'Document added!';
-    let stateLocal;
-    let titleLocal = "";
-
+    alert("3");
     const user = Meteor.user();
     const name = user && user.profile ? user.profile.name : '';
     nameSurname = name.first + " " + name.last;
-    if(importer)
-    {
-      stateLocal = stateGlobal;
-      importer = false;
-      const metadata = stateLocal.get('metadata');
-      titleLocal = metadata.get('title');
-    }
-    else{
-      titleLocal= document.querySelector('[name="title"]').value.trim();
-      stateLocal = parse(aux);
-    }
 
-    auxState = updateTitle(stateLocal,titleLocal, nameSurname);
+    auxState = updateTitle(parse(aux),document.querySelector('[name="title"]').value.trim(), nameSurname);
     //alert(render(notebook));
     upsert = {
-      title: titleLocal,
+      title: document.querySelector('[name="title"]').value.trim(),
       body: render(auxState),
       published: false,
       owner: Meteor.userId(),
@@ -79,32 +68,8 @@ const handleUpsert = () => {
   //loadMarkdownFromDB(parse(doc.body));
 };
 
-const validate = () => {
-  $(component.documentEditorForm).validate({
-    rules: {
-      title: {
-        required: false,
-      },
-      body: {
-        required: false,
-      },
-    },
-    messages: {
-      title: {
-        required: 'Need a title in here, Seuss.',
-      },
-      body: {
-        required: 'This thneeds a body, please.',
-      },
-    },
-    submitHandler() { handleUpsert(); },
-  });
-};
 
-export default function documentEditor(options) {
+export default function documentImporter(options,notebook) {
   component = options.component;
-  if (component.documentEditorForm != null)
-  {
-    validate();
-  }
+  handleImporter (notebook);
 }

@@ -19,7 +19,7 @@ class GraphBlock extends CodeBlock {
         super(props);
         this.state = {
             showHintDialog: Immutable.Map()
-        }
+        };
         this.getCssClass = this.getCssClass.bind(this);
         this.setGraph = this.setGraph.bind(this);
         this.setDataPath = this.setDataPath.bind(this);

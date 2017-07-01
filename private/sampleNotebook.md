@@ -11,8 +11,8 @@ It _should_ get correctly parsed.
 
 [This is a link](http://github.com)
 
-![Image, with alt](https://github.com/thing.jpg "Optional title")
-![](https://github.com/thing.jpg)
+![Image, with alt](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Optional title")
+![](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)
 
 ```python
 print "Non-runnable code sample"

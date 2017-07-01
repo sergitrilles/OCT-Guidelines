@@ -37,6 +37,7 @@ const authenticate = (nextState, replace) => {
 Meteor.startup(() => {
   aux = "";
   stateGlobal = "";
+  importer = false;
   Meteor.call('getFile', function(error, file){
     if(error){
       alert('Errorsss');

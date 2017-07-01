@@ -4,4 +4,4 @@ module.exports = {
     gistApi: 'https://api.github.com/gists',
     cssUrl: 'http://www.joelotter.com/kajero/dist/main.css',
     scriptUrl: 'http://www.joelotter.com/kajero/dist/bundle.js'
-}
+};

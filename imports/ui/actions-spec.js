@@ -164,7 +164,7 @@ describe('actions', () => {
             });
 
             const store = mockStore({});
-            const expected = [{type: actions.GIST_CREATED, id: 'test_gist_id'}]
+            const expected = [{type: actions.GIST_CREATED, id: 'test_gist_id'}];
 
             return store.dispatch(actions.saveGist('title', '## markdown'))
                 .then(() => {

@@ -116,7 +116,7 @@ describe('notebook reducer', () => {
             const action = {
                 type: actions.TOGGLE_META,
                 field: 'showFooter'
-            }
+            };
             const result = reducer(beforeState, action).getIn(['metadata', 'original']);
             expect(result).to.eql(beforeState.getIn(['metadata', 'original']));
         });

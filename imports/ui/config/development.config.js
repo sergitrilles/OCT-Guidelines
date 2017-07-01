@@ -4,4 +4,4 @@ module.exports = {
     gistApi: 'https://api.github.com/gists',
     cssUrl: 'dist/main.css',
     scriptUrl: 'dist/bundle.js'
-}
+};

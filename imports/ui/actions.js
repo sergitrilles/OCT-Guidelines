@@ -116,6 +116,8 @@ export function executeCodeBlock (id) {
                 ).call(
                     context, d3, nv, jutsu, data, reshaper, graphElement
                 );
+                alert(context);
+                alert(result);
                 resolve(result);
             } catch(err) {
                 reject(err);
@@ -206,98 +208,84 @@ export function updateBlock (id, text) {
         id,
         text
     };
-};
-
+}
 export function updateTitle (text) {
     return {
         type: UPDATE_META,
         field: 'title',
         text
     };
-};
-
+}
 export function updateAuthor (text) {
     return {
         type: UPDATE_META,
         field: 'author',
         text
     };
-};
-
+}
 export function toggleFooter() {
     return {
         type: TOGGLE_META,
         field: 'showFooter'
     };
-};
-
+}
 export function addCodeBlock(id) {
     return {
         type: ADD_BLOCK,
         blockType: 'code',
         id
     };
-};
-
+}
 export function addTextBlock(id) {
     return {
         type: ADD_BLOCK,
         blockType: 'text',
         id
     };
-};
-
+}
 export function addGraphBlock(id) {
     return {
         type: ADD_BLOCK,
         blockType: 'graph',
         id
     };
-};
-
-
+}
 export function deleteBlock(id) {
     return {
         type: DELETE_BLOCK,
         id
     };
-};
-
+}
 export function moveBlockUp(id) {
     return {
         type: MOVE_BLOCK_UP,
         id
     };
-};
-
+}
 export function moveBlockDown(id) {
     return {
         type: MOVE_BLOCK_DOWN,
         id
     };
-};
-
+}
 export function deleteDatasource(id) {
     return {
         type: DELETE_DATASOURCE,
         id
     };
-};
-
+}
 export function updateDatasource(id, url) {
     return {
         type: UPDATE_DATASOURCE,
         id,
         text: url
     };
-};
-
+}
 export function toggleSave() {
     return {
         type: TOGGLE_SAVE
     };
-};
-
+}
 function gistCreated(id) {
     return {
         type: GIST_CREATED,
@@ -326,8 +314,7 @@ export function saveGist (title, markdown) {
         .then(response => response.json())
         .then(gist => dispatch(gistCreated(gist.id)));
     };
-};
-
+}
 export function undo() {
     return {
         type: UNDO
