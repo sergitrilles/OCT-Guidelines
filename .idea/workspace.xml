@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fda0d941-e971-404d-a557-2751989babc9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/modules/document-importer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/modules/document-editor.js" afterPath="$PROJECT_DIR$/imports/modules/document-editor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/startup/client/routes.js" afterPath="$PROJECT_DIR$/imports/startup/client/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/startup/server/browser-policy.js" afterPath="$PROJECT_DIR$/imports/startup/server/browser-policy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/actions-spec.js" afterPath="$PROJECT_DIR$/imports/ui/actions-spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/actions.js" afterPath="$PROJECT_DIR$/imports/ui/actions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js" afterPath="$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/DocumentNewEditor.js" afterPath="$PROJECT_DIR$/imports/ui/components/DocumentNewEditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/GraphBlock.js" afterPath="$PROJECT_DIR$/imports/ui/components/GraphBlock.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/config/development.config.js" afterPath="$PROJECT_DIR$/imports/ui/config/development.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/config/production.config.js" afterPath="$PROJECT_DIR$/imports/ui/config/production.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/reducers/notebookReducer-spec.js" afterPath="$PROJECT_DIR$/imports/ui/reducers/notebookReducer-spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/private/sampleNotebook.md" afterPath="$PROJECT_DIR$/private/sampleNotebook.md" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -64,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="actions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/actions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="541">
@@ -84,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DocumentEditorV2.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DocumentEditorV2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+            <state relative-caret-position="420">
+              <caret line="281" column="0" lean-forward="false" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
               <folding>
                 <element signature="e#48#74#0" expanded="true" />
               </folding>
@@ -243,10 +226,10 @@
         <option value="$PROJECT_DIR$/imports/startup/server/browser-policy.js" />
         <option value="$PROJECT_DIR$/imports/modules/document-importer.js" />
         <option value="$PROJECT_DIR$/private/sampleNotebook.md" />
-        <option value="$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js" />
         <option value="$PROJECT_DIR$/imports/modules/document-editor.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/DocumentNewEditor.js" />
         <option value="$PROJECT_DIR$/imports/ui/actions.js" />
+        <option value="$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js" />
       </list>
     </option>
   </component>
@@ -262,9 +245,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-10" />
-    <option name="width" value="1858" />
-    <option name="height" value="1750" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="2155" />
+    <option name="height" value="1162" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -832,12 +816,12 @@
       <workItem from="1498568394974" duration="3193000" />
       <workItem from="1498678118542" duration="11867000" />
       <workItem from="1498806464166" duration="1347000" />
-      <workItem from="1498820035311" duration="18454000" />
+      <workItem from="1498820035311" duration="19079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="403340000" />
+    <option name="totallyTimeSpent" value="403965000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -849,16 +833,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-10" y="0" width="1858" height="1750" extended-state="0" />
+    <frame x="-11" y="-11" width="2155" height="1162" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27096057" sideWeight="0.4970111" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23260248" sideWeight="0.4970111" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283972" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27653998" sideWeight="0.5128443" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29070535" sideWeight="0.4942857" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970384" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2014358" sideWeight="0.5029889" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2179402" sideWeight="0.48715568" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3576881" sideWeight="0.48715568" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24952015" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1256,16 +1240,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-          <folding>
-            <element signature="e#48#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentNewEditor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
@@ -1291,6 +1265,16 @@
         <state relative-caret-position="541">
           <caret line="107" column="67" lean-forward="false" selection-start-line="107" selection-start-column="63" selection-end-line="107" selection-end-column="67" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="281" column="0" lean-forward="false" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

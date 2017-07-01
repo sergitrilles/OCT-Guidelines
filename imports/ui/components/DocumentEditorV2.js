@@ -279,7 +279,6 @@ class DocumentEditor extends React.Component {
                   {publishButton}
                   <Button onClick={ () => handleRemove(doc._id) } className="text-danger">Delete</Button>
                   <Button onClick={ () => handleExport(notebook) } className="text-danger">Export</Button>
-                  <Button onClick={ this.openModal}>Import</Button>
                 </ButtonGroup>
               </ButtonToolbar>
               <div>
