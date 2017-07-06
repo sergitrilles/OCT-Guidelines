@@ -112,7 +112,6 @@ export default class DocumentNewEditor extends React.Component {
 
   _onSelect(option) {
 
-
     this.setState({
       selected: option
     });
@@ -151,7 +150,7 @@ export default class DocumentNewEditor extends React.Component {
         />
         <br></br>
         <ControlLabel>Select template</ControlLabel>
-        <Dropdown options={items} onChange={this._onSelect} value={items[0]} placeholder="Select an option"/>
+        <Dropdown options={items} onChange={this._onSelect} open={stateGlobal = parse(templates[0])} value={items[0]} placeholder="Select an option"/>
 
         <br></br>
         <center><b>OR</b></center>

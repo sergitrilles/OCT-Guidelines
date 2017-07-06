@@ -40,30 +40,30 @@ const handleUpsert = () => {
   else {
     url = "edit";
     confirmation = 'Document added!';
-    let stateLocal;
+    //let stateLocal;
     let titleLocal = "";
     let imageLocal = "";
 
     const user = Meteor.user();
     const name = user && user.profile ? user.profile.name : '';
     nameSurname = name.first + " " + name.last;
-    stateLocal = stateGlobal;
-    alert(stateGlobal);
+    //stateLocal = stateGlobal;
+    //alert(stateGlobal);
     if (importer) {
       importer = false;
-      const metadata = stateLocal.get('metadata');
+      const metadata = stateGlobal.get('metadata');
       titleLocal = metadata.get('title');
       imageLocal = metadata.get('featured_image');
 
     }
     else {
       titleLocal = document.querySelector('[name="title"]').value.trim();
-      const metadata = stateLocal.get('metadata');
+      const metadata = stateGlobal.get('metadata');
       imageLocal = metadata.get('featured_image');
 
     }
-    alert(stateLocal);
-    auxState = updateTitle(stateLocal, titleLocal, nameSurname);
+    //alert(stateLocal);
+    auxState = updateTitle(stateGlobal, titleLocal, nameSurname);
     //alert(render(notebook));
     upsert = {
       title: titleLocal,

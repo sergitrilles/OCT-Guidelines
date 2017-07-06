@@ -13,8 +13,8 @@ const DocumentsPublicList = ({documents}) => (
   documents.length > 0 ? <Grid><Row>
     {documents.map(({_id, title, published, owner, featured_image}) => (
       published == true ? (
-        <Col xs={3} md={4}>
-          <Thumbnail src={featured_image} alt="121x100">
+        <Col xs={6} md={3}>
+          <Thumbnail src={featured_image}  style={{height: 300}} alt="121x100">
             <h4>{ title }</h4>
             <p><Button bsStyle="primary" onClick={ () => handleNav(_id) }>View</Button>&nbsp; </p>
           </Thumbnail>
