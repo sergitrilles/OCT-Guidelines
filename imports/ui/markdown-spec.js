@@ -15,6 +15,7 @@ describe('markdown', () => {
             title: 'A sample notebook',
             author: 'Joel Auterson',
             created: new Date(Date.parse("Mon Apr 18 2016 21:48:01 GMT+0100 (BST)")),
+            featured_image: 'http://luxreview.com/upload/system/2017/02/08115740.jpg',
             showFooter: true,
             original: undefined,
             datasources: {}

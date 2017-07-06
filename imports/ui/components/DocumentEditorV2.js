@@ -216,22 +216,20 @@ class DocumentEditor extends React.Component {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        alert(reader.result);
+
         newState = parse(reader.result);
-        alert(newState);
         stateGlobal = newState;
-        alert("12");
+
         updated = true;
         //handleImporter({component: this, notebook: stateGlobal});
 
        // handleImporter(stateGlobal);
-        alert("11");
 
       };
 
       reader.readAsText(file);
     } else {
-      alert("File not supported!");
+      Bert.alert("File not supported!", 'danger');
     }
   }
 

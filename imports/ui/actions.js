@@ -116,8 +116,7 @@ export function executeCodeBlock (id) {
                 ).call(
                     context, d3, nv, jutsu, data, reshaper, graphElement
                 );
-                alert(context);
-                alert(result);
+
                 resolve(result);
             } catch(err) {
                 reject(err);
@@ -222,6 +221,14 @@ export function updateAuthor (text) {
         field: 'author',
         text
     };
+}
+
+export function updateImage (text) {
+  return {
+    type: UPDATE_META,
+    field: 'featured_image',
+    text
+  };
 }
 export function toggleFooter() {
     return {

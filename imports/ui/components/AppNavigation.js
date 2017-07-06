@@ -13,7 +13,7 @@ const AppNavigation = ({ hasUser }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/">GEO-C Guidelines</Link>
+        <Link to="/"><img width="256px" src="logo-geoc-stories.png" alt="GEO-C stories"></img></Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

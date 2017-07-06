@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { updateAuthor, toggleFooter } from '../actions';
+import { updateAuthor, updateImage, toggleFooter } from '../actions';
 import Datasources from './Datasources';
 
 export default class Metadata extends Component {
@@ -8,10 +8,15 @@ export default class Metadata extends Component {
         super(props);
         this.updateAuthor = this.updateAuthor.bind(this);
         this.toggleFooter = this.toggleFooter.bind(this);
+        this.updateImage = this.updateImage.bind(this);
     }
 
     updateAuthor() {
         this.props.dispatch(updateAuthor(this.refs.authorField.value));
+    }
+
+    updateImage() {
+      this.props.dispatch(updateImage(this.refs.imageField.value));
     }
 
     toggleFooter() {
@@ -22,6 +27,7 @@ export default class Metadata extends Component {
         const { editable, metadata, dispatch } = this.props;
         const author = metadata.get('author');
         const date = metadata.get('created');
+        const featured_image = metadata.get('featured_image');
         if (editable) {
             const iconFooter = metadata.get('showFooter') ? 'check-circle' : 'circle-o';
             return (
@@ -30,6 +36,11 @@ export default class Metadata extends Component {
                         <i className="fa fa-user"></i>
                         <input type="text" defaultValue={author}
                             ref="authorField" onBlur={this.updateAuthor} title="Author" />
+                    </div>
+                    <div className="metadata-row">
+                      <i className="fa fa-picture-o"></i>
+                      <input type="text" defaultValue={featured_image}
+                             ref="imageField" onBlur={this.updateImage} title="Image featured URL" />
                     </div>
                     <div className="metadata-row">
                         <i className={'fa fa-' + iconFooter + ' clickable'}

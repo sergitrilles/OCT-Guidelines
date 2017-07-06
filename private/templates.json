@@ -1,0 +1,16 @@
+{
+  "templates": [
+    {
+      "value": "Blank",
+      "file": "blankNotebook.md"
+    },
+    {
+      "value": "GEO-C sections",
+      "file": "geocNotebook.md"
+    },
+    {
+      "value": "Sample",
+      "file": "sampleNotebook.md"
+    }
+  ]
+}

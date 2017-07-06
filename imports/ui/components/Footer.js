@@ -23,7 +23,10 @@ class Footer extends Component {
         return (
             <div className="footer">
                 <hr className="footer-sep top-sep" />
-
+                  <span className="footer-row">
+                        <i className="fa fa-sitemap"></i>&nbsp;
+                        <a href={config.geocHomepage}> GEO-C</a> project.
+                  </span>
                 <span className="footer-row">
                     <i className="fa fa-flask"></i>&nbsp;
                     Made with <a href={config.kajeroHomepage}>Kajero</a>.

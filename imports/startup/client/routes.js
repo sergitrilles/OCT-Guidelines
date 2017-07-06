@@ -38,12 +38,34 @@ Meteor.startup(() => {
   aux = "";
   stateGlobal = "";
   importer = false;
-  Meteor.call('getFile', function(error, file){
-    if(error){
-      alert('Errorsss');
+  templates = [];
+  jsonTemplates = {};
+  /*  Meteor.call('getFile', function(error, file){
+   if(error){
+   alert('Errorsss');
+   }
+   else{
+   aux = file;
+   }
+   });
+   */
+  Meteor.call('getFileTemplates', function (error, file) {
+    if (error) {
+      alert('Error GetFileTemplate');
     }
-    else{
-      aux = file;
+    else {
+      jsonTemplates = JSON.parse(file);
+
+      for (let i = 0; i < jsonTemplates.templates.length; i++) {
+        Meteor.call('getFile', jsonTemplates.templates[i].file, function (error, file) {
+          if (error) {
+            alert('Error GetFILE');
+          }
+          else {
+            templates[i] = file;
+          }
+        });
+      }
     }
   });
 

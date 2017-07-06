@@ -1,25 +1,28 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import {FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import documentEditor from '../../modules/document-editor.js';
 import handleUpsert from '../../modules/document-editor.js';
 
-import { parse } from './../markdown';
+import {parse} from './../markdown';
 
 import Dropzone from 'react-dropzone'
 
 import Modal from 'react-modal';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css';
 
 export default class DocumentNewEditor extends React.Component {
-
 
 
   constructor(props) {
     super(props);
 
-    this.state = {files: [], modalIsOpen: false};
+    this.state = {files: [], modalIsOpen: false, selected: {value: "0", label: ""}};
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this._onSelect = this._onSelect.bind(this);
+
   }
 
   openModal() {
@@ -37,9 +40,8 @@ export default class DocumentNewEditor extends React.Component {
   }
 
   componentDidMount() {
-    alert("YO");
-    documentEditor({ component: this });
-    const { doc } = this.props;
+    documentEditor({component: this});
+    const {doc} = this.props;
     /*
      var fs = Npm.require('fs');
      var fs_sync = Meteor.wrapAsync(fs.readFile, fs);
@@ -68,7 +70,9 @@ export default class DocumentNewEditor extends React.Component {
     //doc.body = parse(aux);
     //alert(doc.body);
 
-    setTimeout(() => { document.querySelector('[name="title"]').focus(); }, 0);
+    setTimeout(() => {
+      document.querySelector('[name="title"]').focus();
+    }, 0);
   }
 
 
@@ -80,7 +84,7 @@ export default class DocumentNewEditor extends React.Component {
     });
 
     //console.log('Received files: ', files);
-    if (rejectedFiles.length==0) {
+    if (rejectedFiles.length == 0) {
       var file = acceptedFiles[0];
       var textType = /text\/plain.*/;
 
@@ -95,21 +99,43 @@ export default class DocumentNewEditor extends React.Component {
         };
 
         reader.readAsText(file);
-        this.setState({
-          files: acceptedFiles
-        });
+
 
       } else {
         Bert.alert("File not supported!", 'danger');
       }
     }
-    else{
+    else {
       Bert.alert("File not supported!", 'danger');
     }
   }
 
+  _onSelect(option) {
+
+
+    this.setState({
+      selected: option
+    });
+
+    index = 0;
+
+    for (var i = 0; i < jsonTemplates.templates.length; i++) {
+      if (jsonTemplates.templates[i].value == option.value){
+        index = i;
+      }
+    }
+
+    stateGlobal = parse(templates[index]);
+
+  }
+
   render() {
-    const { doc } = this.props;
+    const {doc} = this.props;
+    items = this.renderListItems();
+
+    const options = [
+      'one', 'two', 'three'
+    ];
 
     return (<form
       ref={ form => (this.documentEditorForm = form) }
@@ -124,10 +150,14 @@ export default class DocumentNewEditor extends React.Component {
           placeholder="Oh, The Places You'll Go!"
         />
         <br></br>
+        <ControlLabel>Select template</ControlLabel>
+        <Dropdown options={items} onChange={this._onSelect} value={items[0]} placeholder="Select an option"/>
+
+        <br></br>
         <center><b>OR</b></center>
         <br></br>
         <ControlLabel>Import</ControlLabel>
-        <Dropzone  style={{
+        <Dropzone style={{
           height: 100,
           border: '2px dashed #ddd',
           borderRadius: 3,
@@ -135,12 +165,12 @@ export default class DocumentNewEditor extends React.Component {
           alignItems: 'center',
           justifyContent: 'center'
 
-        }}  accept="text/plain" multiple={false} onDrop={this.onDrop.bind(this)}>
+        }} accept="text/plain" multiple={false} onDrop={this.onDrop.bind(this)}>
           <div>Try dropping your guideline txt here, or click to select file to upload.</div>
         </Dropzone>
         <br></br>
         {this.state.files.length > 0 ? <div>
-          <div>Uploaded {this.state.files.map((file) =>  <li key= {file.id}> {file.name} </li> )}</div>
+          <div>Uploaded {this.state.files.map((file) => <li key={file.id}> {file.name} </li>)}</div>
         </div> : null}
 
       </FormGroup>
@@ -150,6 +180,15 @@ export default class DocumentNewEditor extends React.Component {
       </Button>
     </form>);
 
+  }
+
+  renderListItems() {
+    var items = [];
+
+    for (var i = 0; i < jsonTemplates.templates.length; i++) {
+      items.push(jsonTemplates.templates[i].value);
+    }
+    return items;
   }
 }
 

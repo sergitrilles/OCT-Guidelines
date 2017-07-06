@@ -8,7 +8,7 @@ const Documents = () => (
     <Row>
       <Col xs={ 12 }>
         <div className="page-header clearfix">
-          <h4 className="pull-left">Guidelines</h4>
+          <h4 className="pull-left">Your guidelines</h4>
           <Link to="/documents/new">
             <Button
               bsStyle="success"

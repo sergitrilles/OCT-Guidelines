@@ -36,6 +36,10 @@ Documents.schema = new SimpleSchema({
     type: Boolean,
     label: 'Guideline state.',
   },
+  featured_image: {
+    type: String,
+    label: 'The url of image the document.',
+  },
 });
 
 Documents.attachSchema(Documents.schema);
@@ -45,4 +49,5 @@ Factory.define('document', Documents, {
   title: () => 'Factory Title',
   body: () =>  'Factory Body',
   published: () => false,
+  featured_image: () =>  'Factory image'
 });

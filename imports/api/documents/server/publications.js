@@ -10,13 +10,24 @@ Meteor.publish('documents.view', (_id) => {
 });
 
 Meteor.methods({
-  getFile : function(){
+  getFile : function(param){
+    check(param, String);
 
-    var file = Assets.getText('sampleNotebook.md');
+    console.log(param);
+
+    var file = Assets.getText(param);
+
+    return file;
+  },
+
+  getFileTemplates: function ()
+  {
+    var file = Assets.getText('templates.json');
 
     return file;
   }
 });
+
 /*
 Meteor.methods({
   getFile : function(){

@@ -15,18 +15,17 @@ let component;
 
 export function handleImporter (options){
   component = options.component;
-  alert("kk");
+
   const { doc } = component.props;
   //const { notebook } = component.props.notebook;
   confirmation = "";
   url = "";
-  alert("1");
+
   if (doc && doc._id){
     var bodyContent;
     auxState = render(component.notebook);
     const metadata = component.notebook.get('metadata');
     const title = metadata.get('title');
-    alert("2");
     confirmation =  'Document updated!' ;
     upsert = {
       title: title,
@@ -38,7 +37,7 @@ export function handleImporter (options){
   else{
     url = "edit";
     confirmation = 'Document added!';
-    alert("3");
+
     const user = Meteor.user();
     const name = user && user.profile ? user.profile.name : '';
     nameSurname = name.first + " " + name.last;
@@ -57,7 +56,6 @@ export function handleImporter (options){
 
   upsertDocument.call(upsert, (error, response) => {
     if (error) {
-      alert(error);
       Bert.alert(error.reason, 'danger');
     } else {
       component.documentEditorForm.reset();
@@ -66,9 +64,7 @@ export function handleImporter (options){
     }
   });
   //loadMarkdownFromDB(parse(doc.body));
-};
-
-
+}
 export default function documentImporter(options,notebook) {
   component = options.component;
   handleImporter (notebook);

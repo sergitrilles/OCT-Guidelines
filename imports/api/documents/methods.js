@@ -12,6 +12,7 @@ export const upsertDocument = new ValidatedMethod({
     title: { type: String, optional: true },
     body: { type: String, optional: false },
     published: { type: Boolean, optional: true },
+    featured_image: { type: String, optional: false },
   }).validator(),
   run(document) {
     return Documents.upsert({ _id: document._id }, { $set: document });
