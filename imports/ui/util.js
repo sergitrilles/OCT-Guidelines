@@ -93,3 +93,14 @@ export function renderHTML(markdown) {
     result += '    </body>\n</html>\n';
     return result;
 }
+
+export function userName( name ) {
+  var uName = Meteor.users.findOne( name );
+  if ( uName ) {
+    const name = uName && uName.profile ? uName.profile.name : '';
+    nameSurname = name.first + " " + name.last;
+    return nameSurname;
+  } else {
+    return "No user name";
+  }
+}
