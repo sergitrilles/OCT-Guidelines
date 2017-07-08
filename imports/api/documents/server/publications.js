@@ -9,6 +9,10 @@ Meteor.publish('documents.view', (_id) => {
   return Documents.find(_id);
 });
 
+Meteor.publish('usersData',  () =>{
+  return Meteor.users.find({}, {fields: {username: 1, emails: 1, profile: 1}})
+});
+
 Meteor.methods({
   getFile : function(param){
     check(param, String);

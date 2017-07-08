@@ -95,12 +95,15 @@ export function renderHTML(markdown) {
 }
 
 export function userName( name ) {
-  var uName = Meteor.users.findOne( name );
-  if ( uName ) {
-    const name = uName && uName.profile ? uName.profile.name : '';
-    nameSurname = name.first + " " + name.last;
-    return nameSurname;
-  } else {
-    return "No user name";
-  }
+
+  var uName = Meteor.users.findOne({_id:name});
+    if ( uName ) {
+      const name = uName && uName.profile ? uName.profile.name : '';
+      nameSurname = name.first + " " + name.last;
+      return nameSurname;
+    } else {
+      return "No user name";
+    }
+
+
 }

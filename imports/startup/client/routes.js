@@ -40,6 +40,8 @@ Meteor.startup(() => {
   importer = false;
   templates = [];
   jsonTemplates = {};
+  Meteor.subscribe('usersData');
+
   /*  Meteor.call('getFile', function(error, file){
    if(error){
    alert('Errorsss');
@@ -68,6 +70,7 @@ Meteor.startup(() => {
       }
     }
   });
+
 
   render(
     <Router history={ browserHistory }>
