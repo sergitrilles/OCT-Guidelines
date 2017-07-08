@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {browserHistory} from 'react-router';
-import {ListGroup, Well, Col, Row, Grid, Thumbnail, ListGroupItem, Alert, Button} from 'react-bootstrap';
+import {ListGroup, Well, Col, Row, Grid, Thumbnail, ListGroupItem, Alert } from 'react-bootstrap';
 import {Meteor} from 'meteor/meteor';
 import Documents from '../../api/documents/documents';
 import container from '../../modules/container';
+
+import { Card, CardBlock, Button, CardTitle, CardText, CardImg } from 'reactstrap';
+
 
 const handleNav = _id => browserHistory.push(`/documents/${_id}`);
 
@@ -13,15 +16,26 @@ const DocumentsPublicList = ({documents}) => (
   documents.length > 0 ? <Grid><Row>
     {documents.map(({_id, title, published, owner, featured_image}) => (
       published == true ? (
-        <Col xs={6} md={3}>
-          <Thumbnail src={featured_image}  style={{height: 300}} alt="121x100">
-            <h4>{ title }</h4>
-            <p><Button bsStyle="primary" onClick={ () => handleNav(_id) }>View</Button>&nbsp; </p>
-          </Thumbnail>
+        <Col sm={6} md={4}>
+          <div>
+            <Card style={{
+              marginBottom: '10px',
+              maxWidth: '500px',
+              borderColor: '#c1bdc1',
+              border: 'solid 1px #c1bdc1',
+            }}>
+              <CardImg top width="100%" src={featured_image} alt="Card image cap" />
+              <CardBlock style={{ padding: '10px' }}>
+                <CardTitle>{ title }</CardTitle>
+                <Button onClick={ () => handleNav(_id) }>View</Button>
+              </CardBlock>
+            </Card>
+          </div>
         </Col> ): null
     ))}
   </Row></Grid> : <Alert bsStyle="warning">No documents yet.</Alert>
 );
+
 
 
 DocumentsPublicList.propTypes = {
