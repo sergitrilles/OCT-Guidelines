@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addCodeBlock, addTextBlock, addGraphBlock } from '../actions';
+import { addCodeBlock, addTextBlock, addGraphBlock, addMapBlock } from '../actions';
 
 export default class AddControls extends Component {
 
@@ -8,6 +8,7 @@ export default class AddControls extends Component {
         this.addCodeBlock = this.addCodeBlock.bind(this);
         this.addTextBlock = this.addTextBlock.bind(this);
         this.addGraphBlock = this.addGraphBlock.bind(this);
+        this.addMapBlock = this.addMapBlock.bind(this);
     }
 
     addCodeBlock() {
@@ -22,6 +23,10 @@ export default class AddControls extends Component {
         this.props.dispatch(addGraphBlock(this.props.id));
     }
 
+  addMapBlock() {
+    this.props.dispatch(addMapBlock(this.props.id));
+  }
+
     render() {
         const {editable} = this.props;
         if (!editable) {
@@ -29,6 +34,9 @@ export default class AddControls extends Component {
         }
         return (
             <div className="add-controls">
+                <i className="fa fa-map-o clickable" onClick={this.addMapBlock}
+                   title="New map block">
+                </i>
                 <i className="fa fa-file-text-o clickable" onClick={this.addTextBlock}
                     title="New text block">
                 </i>

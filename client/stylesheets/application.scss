@@ -13,13 +13,12 @@
 @import '../../../node_modules/highlight.js/styles/tomorrow';
 @import '../../../node_modules/nvd3/build/nv.d3';
 @import '../../../node_modules/codemirror/lib/codemirror';
-
+@import '../../../node_modules/leaflet/dist/leaflet.css';
 
 @import "module/Loading";
 @import "module/Login";
 @import "module/PageHeader";
 @import "module/Signup";
-
 
 
 @import "state/Navbar";

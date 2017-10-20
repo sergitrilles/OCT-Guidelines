@@ -17,9 +17,10 @@ const handleNav = _id => browserHistory.push(`/documents/${_id}`);
 
 const DocumentsPublicList = ({documents}) => (
   documents.length > 0 ? <Grid><Row>
-    {documents.map(({_id, title, published, owner, featured_image}) => (
+    {documents.map(({_id, title, published, owner, featured_image}) =>
+      (
       published == true ? (
-        <Col sm={6} md={4}>
+        <Col xs={6} md={3}>
           <div>
             <Card style={{
               marginBottom: '10px',
@@ -40,7 +41,8 @@ const DocumentsPublicList = ({documents}) => (
             </Card>
           </div>
         </Col> ): null
-    ))}
+    )
+    )}
   </Row></Grid> : <Alert bsStyle="warning">No documents yet.</Alert>
 );
 

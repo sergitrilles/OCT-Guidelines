@@ -24,6 +24,7 @@ export const initialState = Immutable.Map({
 
 export default function execution(state = initialState, action) {
     const { id, code, text, name, data, context } = action;
+
     switch (action.type) {
         case CODE_EXECUTED:
             return state

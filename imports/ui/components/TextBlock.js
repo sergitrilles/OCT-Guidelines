@@ -3,6 +3,8 @@ import MarkdownIt from 'markdown-it';
 import Block from './Block';
 import { highlight } from '../util';
 
+import SelectionPopover from 'react-selection-popover'
+
 const md = new MarkdownIt({highlight, html: true});
 
 class TextBlock extends Block {
@@ -11,11 +13,14 @@ class TextBlock extends Block {
         super(props);
     }
 
+
+
     rawMarkup(markdown) {
         return {__html: md.render(markdown)};
     }
 
     renderViewerMode() {
+
         const { block } = this.props;
         const buttons = this.getButtons();
         return (
@@ -23,10 +28,12 @@ class TextBlock extends Block {
                 <div className="editor-buttons">
                     {buttons}
                 </div>
+
                 <div className="text-block-content"
                     dangerouslySetInnerHTML={this.rawMarkup(block.get('content'))}
                     onClick={this.enterEdit}>
                 </div>
+
             </div>
         );
     }

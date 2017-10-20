@@ -4,6 +4,7 @@ import { contentSelector } from '../selectors';
 import TextBlock from './TextBlock';
 import CodeBlock from './CodeBlock';
 import GraphBlock from './GraphBlock';
+import MapBlock from './MapBlock';
 import AddControls from './AddControls';
 
 class Content extends Component {
@@ -31,19 +32,43 @@ class Content extends Component {
                         />
                     );
                     break;
-                default:
-                    const hasBeenRun = blocksExecuted.includes(id);
-                    const result = results.get(id);
-                    const BlockClass = block.get('type') === 'code' ?
-                        CodeBlock : GraphBlock;
-                    blocks.push(
-                        <BlockClass
-                            block={block} result={result} editable={editable}
-                            key={String(i)} hasBeenRun={hasBeenRun} dispatch={dispatch}
-                            isFirst={isFirst} isLast={isLast}
-                            editing={id === activeBlock}
-                        />
-                    );
+              case 'code':
+                 hasBeenRun = blocksExecuted.includes(id);
+                 result = results.get(id);
+                 BlockClass =  CodeBlock;
+                blocks.push(
+                  <BlockClass
+                    block={block} result={result} editable={editable}
+                    key={String(i)} hasBeenRun={hasBeenRun} dispatch={dispatch}
+                    isFirst={isFirst} isLast={isLast}
+                    editing={id === activeBlock}
+                  />
+                );
+              case 'graph':
+                 hasBeenRun = blocksExecuted.includes(id);
+                 result = results.get(id);
+                 BlockClass = GraphBlock;
+                blocks.push(
+                  <BlockClass
+                    block={block} result={result} editable={editable}
+                    key={String(i)} hasBeenRun={hasBeenRun} dispatch={dispatch}
+                    isFirst={isFirst} isLast={isLast}
+                    editing={id === activeBlock}
+                  />
+                );
+              case 'map':
+                 hasBeenRun = blocksExecuted.includes(id);
+                 result = results.get(id);
+                 BlockClass = MapBlock;
+                blocks.push(
+                  <BlockClass
+                    block={block} result={result} editable={editable}
+                    key={String(i)} hasBeenRun={hasBeenRun} dispatch={dispatch}
+                    isFirst={isFirst} isLast={isLast}
+                    editing={id === activeBlock}
+                  />
+                );
+
             }
         }
         blocks.push(

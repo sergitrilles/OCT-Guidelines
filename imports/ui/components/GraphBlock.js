@@ -188,7 +188,9 @@ class GraphBlock extends CodeBlock {
                 onClick={this.saveAsCode} key="done">
             </i>
         );
+        //alert(this.props.block.get('content'));
         return (
+
             <div className="graph-creator">
                 <div className="editor-buttons">
                     {buttons}

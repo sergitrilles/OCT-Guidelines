@@ -18,6 +18,7 @@ import {
   GIST_CREATED,
   UNDO,
   CHANGE_CODE_BLOCK_OPTION,
+  UPDATE_MAP_BLOCK_PROPERTY,
   UPDATE_GRAPH_BLOCK_PROPERTY,
   UPDATE_GRAPH_BLOCK_HINT,
   UPDATE_GRAPH_BLOCK_LABEL,
@@ -70,7 +71,21 @@ export default function notebook(state = initialState, action) {
         newBlock.content = '// New code block';
         newBlock.language = 'javascript';
         newBlock.option = 'runnable';
-      } else if (blockType === 'graph') {
+      }
+      else if (blockType === 'map') {
+        newBlock.language = 'javascript';
+        newBlock.option = 'runnable';
+        newBlock.content = 'return map.map(data);';
+        newBlock.graphType = 'map';
+        newBlock.dataPath = 'data';
+        newBlock.hints = Immutable.fromJS({
+          zoom: '',
+          x: '',
+          y: ''
+        });
+
+      }
+      else if (blockType === 'graph') {
         newBlock.language = 'javascript';
         newBlock.option = 'runnable';
         newBlock.content = 'return graphs.pieChart(data);';
@@ -159,12 +174,28 @@ export default function notebook(state = initialState, action) {
           .remove('graphType').remove('labels')
           .remove('dataPath')
       );
+
+    case UPDATE_MAP_BLOCK_PROPERTY:
+      newState = state.setIn(
+        ['blocks', id, action.property], action.value
+      );
+      return handleChange(state, newState.setIn(
+        ['blocks', id, 'content'],
+        generateCode(newState.getIn(['blocks', id]))
+      ));
+
     default:
       return state;
   }
 }
 
 function generateCode(block) {
+
+  if (block.get('graphType') === 'map') {
+    return 'return map.' + block.get('graphType') +
+      '(' + block.get('dataPath') + ');';
+  }
+
   return 'return graphs.' + block.get('graphType') +
     '(' + block.get('dataPath') + getLabels(block) +
     getHints(block) + ');';
@@ -190,6 +221,10 @@ function getHints(block) {
 
 function getLabels(block) {
   if (block.get('graphType') === 'pieChart') {
+    return '';
+  }
+
+  if (block.get('graphType') === 'map') {
     return '';
   }
   const labels = block.get('labels');

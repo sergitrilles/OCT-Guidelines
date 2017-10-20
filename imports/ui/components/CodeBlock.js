@@ -7,6 +7,7 @@ import {
     executeCodeBlock, changeCodeBlockOption, clearGraphData
 } from '../actions';
 
+
 const md = new MarkdownIt({highlight});
 
 class CodeBlock extends Block {
@@ -111,7 +112,8 @@ class CodeBlock extends Block {
                 <div hidden={!hasBeenRun} className="graphBlock"
                     id={"kajero-graph-" + block.get('id')}>
                 </div>
-                <div hidden={!hasBeenRun} className="resultBlock">
+
+                {<div hidden={!hasBeenRun} className="resultBlock">
                     <div className="editor-buttons">
                         {hideBlock ? buttons : null}
                     </div>
@@ -119,7 +121,8 @@ class CodeBlock extends Block {
                         data={result}
                         useHljs='true'
                     />
-                </div>
+                </div>}
+
             </div>
         );
     }
