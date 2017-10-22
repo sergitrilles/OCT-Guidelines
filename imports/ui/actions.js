@@ -134,7 +134,7 @@ export function executeCodeBlock(id) {
 
     var sResul =""
     if (code) {
-      var map_var = /map/;
+      var map_var = /map.map/;
       var graph = /graph/;
       var graphElement;
 
