@@ -127,7 +127,7 @@ function loadMarkdownFromHTML() {
 export function executeCodeBlock(id) {
   return (dispatch, getState) => {
 
-    L.Icon.Default.imagePath = '../../';
+    L.Icon.Default.imagePath = '/';
 
 
     const code = getState().notebook.getIn(['blocks', id, 'content']);
