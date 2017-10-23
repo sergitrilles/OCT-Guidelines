@@ -145,6 +145,7 @@ export function executeCodeBlock(id) {
       const data = executionState.get('data').toJS();
 
       if (code.match(map_var) && dataString != "data") {
+        //alert("kk");
 
         return new Promise((resolve, reject) => {
           try {
