@@ -99,6 +99,7 @@ export default class Block extends Component {
             return this.renderViewerMode();
         }
         const isCodeBlock = block.get('type') === 'code';
+        const id = this.props.block.get('id');
         const options = {
             mode: isCodeBlock ? 'javascript' : 'markdown',
             theme: 'base16-tomorrow-light',
@@ -111,9 +112,22 @@ export default class Block extends Component {
                 }
             }
         };
+        /*
+        graphElement = document.getElementById("kajero-graph-" + id);
+        if (graphElement) {
+          var mapContainerParent = graphElement.parentNode;
+          mapContainerParent.removeChild(graphElement);
+        }
+        graphElement = document.getElementById("resultBlock-" + id);
+        if (graphElement) {
+          var mapContainerParent = graphElement.parentNode;
+          mapContainerParent.removeChild(graphElement);
+        }
+        */
+        alert(this.state.text);
         return (
-            <div className="edit-box" onClick={(e) => {e.stopPropagation()}}>
-                <Codemirror value={this.state.text} options={options}
+            <div className="edit-box" id={'edit-box-' + id} onClick={(e) => {e.stopPropagation()}}>
+                <Codemirror id={'codemirror-' + id} value={this.state.text} options={options}
                     onChange={this.textChanged} ref="editarea" />
             </div>
         );

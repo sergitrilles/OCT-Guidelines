@@ -247,6 +247,7 @@ class MapBlock extends Block {
                       click={this.setDataPath}
                       path='data'
                       name='data'
+                      id={'visualiser-' + id}
           />
 
           <hr/>
@@ -270,6 +271,7 @@ class MapBlock extends Block {
                       click={this.setDataPath}
                       path='data'
                       name='data'
+                      id={'visualiser-' + id}
           />
           <hr/>
           <p>Preview (not GEOJSON selected)</p>

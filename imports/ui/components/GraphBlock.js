@@ -132,7 +132,7 @@ class GraphBlock extends CodeBlock {
                             placeholder="No hint given" />
                     </div>
                     {showDialog ?
-                        <Visualiser data={this.selectedData} useHljs={true}
+                        <Visualiser data={this.selectedData} id={'visualiser-' + id} useHljs={true}
                             click={(key) => {this.setHint(hint, key)}} />
                         : null}
                 </div>
@@ -212,6 +212,7 @@ class GraphBlock extends CodeBlock {
                     click={this.setDataPath}
                     path='data'
                     name='data'
+                    id={'visualiser-' + id}
                 />
                 <hr/>
                 <p>Hints</p>

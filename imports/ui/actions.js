@@ -129,7 +129,6 @@ export function executeCodeBlock(id) {
 
     L.Icon.Default.imagePath = '/';
 
-
     const code = getState().notebook.getIn(['blocks', id, 'content']);
 
     var sResul =""
@@ -163,15 +162,34 @@ export function executeCodeBlock(id) {
             };
 
             if (graphElement) {
+              alert("1");
 
-              var mapContainerParent = graphElement.parentNode;
-              mapContainerParent.removeChild(graphElement);
-              var newMapContainer = document.createElement('div');
-              newMapContainer.setAttribute("id", "kajero-graph-" + id);
-              mapContainerParent.appendChild(newMapContainer);
+              //var mapContainerParent = graphElement.parentNode;
+              //mapContainerParent.removeChild(graphElement);
+              //var newMapContainer = document.createElement('div');
+              //newMapContainer.setAttribute("id", "kajero-graph-" + id);
+              //newMapContainer.setAttribute("class", "graphBlock");
+              //newMapContainer.setAttribute("value", "map");
+              //mapContainerParent.appendChild(newMapContainer);
               //mapContainerParent.insertChildAtIndex(newMapContainer,2);
 
-              graphElement = document.getElementById("kajero-graph-" + id);
+              //graphElement = document.getElementById("kajero-graph-" + id);
+              //
+
+              while(graphElement.firstChild)
+                graphElement.parentNode.removeChild(graphElement);
+              var t = document.createElement('div');
+              t.setAttribute("id", "kajero-graph-" + id);
+              t.setAttribute("class", "graphBlock");
+              //t.innerHTML = response;
+              graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
+              //graphElement.parentNode.appendChild()
+
+              /*
+              graphElement.innerHTML = "";
+              graphElement = document.createElement('div');
+              graphElement.setAttribute("id", "kajero-graph-" + id);
+              graphElement.setAttribute("class", "graphBlock");*/
 
               if (window['map' + id]) {
                 window['map' + id].off();
@@ -179,7 +197,7 @@ export function executeCodeBlock(id) {
                 //window['map' + id].invalidateSize();
               }
 
-              window['map' + id] = L.map(graphElement, {
+              window['map' + id] = L.map(t, {
                 center: [0, 0],
                 minZoom: 0,
                 maxZoom: 16,
@@ -227,6 +245,8 @@ export function executeCodeBlock(id) {
             mapContainerParent.removeChild(graphElement);
             var newMapContainer = document.createElement('div');
             newMapContainer.setAttribute("id", "kajero-graph-" + id);
+            newMapContainer.setAttribute("className", "graphBlock");
+            newMapContainer.setAttribute("value", "map");
             newMapContainer.innerHTML = "<i><small>Please, select a correct GeoJson as Datasource!</small></i>";
             mapContainerParent.appendChild(newMapContainer);
             //mapContainerParent.insertChildAtIndex(newMapContainer,2);
@@ -490,7 +510,6 @@ export function moveBlockUp(id) {
     mapContainerParent.removeChild(graphElement);
   }
 
-
   return {
     type: MOVE_BLOCK_UP,
     id
@@ -631,6 +650,40 @@ export function clearGraphData(id) {
 }
 
 export function editBlock(id) {
+
+
+  graphElement = document.getElementById("kajero-graph-" + id);
+  if (graphElement) {
+    var mapContainerParent = graphElement.parentNode;
+    mapContainerParent.removeChild(graphElement.parentNode.childNodes[1]);
+  }
+
+
+    /*
+    alert("editBlock");
+    graphElement = document.getElementById("kajero-graph-" + id);
+    if (graphElement && (graphElement.getAttribute('value')=="map")){
+      var mapContainerParent = graphElement.parentNode;
+      mapContainerParent.removeChild(graphElement);
+      var newMapContainer = document.createElement('div');
+      newMapContainer.setAttribute("id", "kajero-graph-" + id);
+      newMapContainer.setAttribute("hidden", true);
+      newMapContainer.setAttribute("className", "graphBlock");
+      newMapContainer.setAttribute("value", "map");
+      mapContainerParent.appendChild(newMapContainer);
+    }
+    graphElement = document.getElementById("resultBlock-" + id);
+    if (graphElement && (graphElement.getAttribute('value')=="map")){
+      var mapContainerParent = graphElement.parentNode;
+      mapContainerParent.removeChild(graphElement);
+      var newMapContainer = document.createElement('div');
+      newMapContainer.setAttribute("id", "resultBlock-" + id);
+      newMapContainer.setAttribute("hidden", true);
+      newMapContainer.setAttribute("className", "resultBlock");
+      newMapContainer.setAttribute("value", "map");
+      mapContainerParent.appendChild(newMapContainer);
+    }
+    */
   return {
     type: EDIT_BLOCK,
     id

@@ -87,12 +87,15 @@ class CodeBlock extends Block {
     }
 
     renderViewerMode() {
+
         const { block, hasBeenRun, result, editable } = this.props;
+
         let buttons = this.getButtons();
         const runButton = this.getRunButton();
         const optionButton = this.getOptionButton();
         const hideBlock = !editable && block.get('option') === 'hidden';
         const containerClass = hideBlock ? ' hiddenCode' : '';
+        const id = block.get('id');
         if (buttons == null) {
             buttons = [runButton, optionButton];
         } else {
@@ -100,9 +103,9 @@ class CodeBlock extends Block {
             buttons.unshift(runButton);
         }
         return (
-            <div className={'codeContainer' + containerClass}>
-                <div className="codeBlock">
-                    <div className="editor-buttons">
+            <div className={'codeContainer' + containerClass} id={'codeContainer-' + id}>
+                <div className="codeBlock" id={'codeBlock-' + id}>
+                    <div className="editor-buttons" id={'editor-buttons-' + id}>
                         {buttons}
                     </div>
                     <div onClick={this.enterEdit}
@@ -113,13 +116,14 @@ class CodeBlock extends Block {
                     id={"kajero-graph-" + block.get('id')}>
                 </div>
 
-                {<div hidden={!hasBeenRun} className="resultBlock">
+                {<div hidden={!hasBeenRun} className="resultBlock" id={'resultBlock-' + id}>
                     <div className="editor-buttons">
                         {hideBlock ? buttons : null}
                     </div>
                     <Visualiser
                         data={result}
                         useHljs='true'
+                        id={'visualiser-' + id}
                     />
                 </div>}
 
