@@ -145,7 +145,6 @@ export function executeCodeBlock(id) {
       const data = executionState.get('data').toJS();
 
       if (code.match(map_var) && dataString != "data") {
-        //alert("kk");
 
         return new Promise((resolve, reject) => {
           try {
@@ -220,7 +219,7 @@ export function executeCodeBlock(id) {
               window['map' + id].invalidateSize();
             }, 10);
 
-            var sResul ="Map rendered!"
+            var sResul ="Map block"
             resolve(sResul);
           } catch (err) {
 
@@ -332,6 +331,15 @@ export function executeCodeBlock(id) {
  };
  }
  */
+
+function changeResultMessage(id, result) {
+
+  return {
+    type: CODE_EXECUTED,
+    id,
+    data: result
+  };
+}
 
 
 function codeExecuted(id, result, context) {
@@ -476,12 +484,26 @@ export function deleteBlock(id) {
   };
 }
 export function moveBlockUp(id) {
+  graphElement = document.getElementById("kajero-graph-" + id);
+  if (graphElement) {
+    var mapContainerParent = graphElement.parentNode;
+    mapContainerParent.removeChild(graphElement);
+  }
+
+
   return {
     type: MOVE_BLOCK_UP,
     id
   };
 }
 export function moveBlockDown(id) {
+
+  graphElement = document.getElementById("kajero-graph-" + id);
+  if (graphElement) {
+    var mapContainerParent = graphElement.parentNode;
+    mapContainerParent.removeChild(graphElement);
+
+  }
   return {
     type: MOVE_BLOCK_DOWN,
     id

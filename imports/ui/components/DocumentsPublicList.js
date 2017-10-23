@@ -20,7 +20,7 @@ const DocumentsPublicList = ({documents}) => (
     {documents.map(({_id, title, published, owner, featured_image}) =>
       (
       published == true ? (
-        <Col xs={6} md={3}>
+        <Col xs={12} md={4}>
           <div>
             <Card style={{
               marginBottom: '10px',

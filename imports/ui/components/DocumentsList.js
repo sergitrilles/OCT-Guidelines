@@ -21,7 +21,6 @@ const DocumentsList = ({ documents }) => (
   documents.length > 0 ? <ListGroup className="DocumentsList">
       {documents.map(({ _id, title, owner, body }) => (
 
-
         Meteor.userId() == owner ?
 
         <ListGroupItem key={ _id } onClick={ () => handleNav(_id) }>

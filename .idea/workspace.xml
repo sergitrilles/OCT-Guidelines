@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda0d941-e971-404d-a557-2751989babc9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/NotebookList.js" afterPath="$PROJECT_DIR$/imports/ui/NotebookList.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/actions.js" afterPath="$PROJECT_DIR$/imports/ui/actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/reducers/notebookListReducer.js" afterPath="$PROJECT_DIR$/imports/ui/reducers/notebookListReducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/geojson.json" afterPath="$PROJECT_DIR$/public/geojson.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/DocumentsList.js" afterPath="$PROJECT_DIR$/imports/ui/components/DocumentsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js" afterPath="$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,13 +36,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#751#911#0" expanded="true" />
-                <marker date="1508743575219" expanded="true" signature="969:6428" ph="{...}" />
-                <marker date="1508743575219" expanded="true" signature="1835:1965" ph="{...}" />
-                <marker date="1508743575219" expanded="true" signature="5996:6404" ph="&lt;div/&gt;" />
-                <marker date="1508743575219" expanded="true" signature="5996:6421" ph="{...}" />
-                <marker date="1508743575219" expanded="true" signature="5996:6425" ph="{...}" />
-                <marker date="1508743575219" expanded="true" signature="6017:6088" ph="&lt;div/&gt;" />
-                <marker date="1508743575219" expanded="true" signature="6147:6324" ph="&lt;Visualiser/&gt;" />
               </folding>
             </state>
           </provider>
@@ -57,25 +48,50 @@
               <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1508743570931" expanded="true" signature="356:4203" ph="{...}" />
-                <marker date="1508743570931" expanded="true" signature="2710:4200" ph="{...}" />
-                <marker date="1508743570931" expanded="true" signature="3276:4183" ph="&lt;div/&gt;" />
-                <marker date="1508743570931" expanded="true" signature="3895:4007" ph="&lt;div/&gt;" />
-                <marker date="1508743570931" expanded="true" signature="4028:4139" ph="&lt;Visualiser/&gt;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="actions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="147" column="10" lean-forward="false" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
+            <state relative-caret-position="338">
+              <caret line="219" column="19" lean-forward="true" selection-start-line="219" selection-start-column="19" selection-end-line="219" selection-end-column="19" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#252#351#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DocumentsList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DocumentsPublicList.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="actions-spec.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/actions-spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="490" column="27" lean-forward="false" selection-start-line="490" selection-start-column="27" selection-end-line="490" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,7 +109,7 @@
       <file leaf-file-name="AppNavigation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/AppNavigation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="155">
               <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -105,7 +121,7 @@
       <file leaf-file-name="notebookReducer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/reducers/notebookReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1818">
+            <state relative-caret-position="18">
               <caret line="126" column="44" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="44" />
               <folding />
             </state>
@@ -115,42 +131,10 @@
       <file leaf-file-name="GraphBlock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/GraphBlock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2430">
-              <caret line="135" column="62" lean-forward="false" selection-start-line="135" selection-start-column="58" selection-end-line="135" selection-end-column="62" />
+            <state relative-caret-position="425">
+              <caret line="45" column="8" lean-forward="false" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="47" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="markdown.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/markdown.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="selectors.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/selectors.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/util.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -169,36 +153,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>maps</find>
-      <find>ma</find>
-      <find>kaj</find>
-      <find>kajero</find>
-      <find>kajero-gr</find>
-      <find>k</find>
-      <find>ka</find>
-      <find>kajero-map</find>
-      <find>kajero-ma</find>
-      <find>kajero-m</find>
-      <find>kajero-</find>
-      <find>kajero-g</find>
-      <find>grpah</find>
-      <find>grpa</find>
-      <find>grp</find>
-      <find>gr</find>
-      <find>gra</find>
-      <find>graph</find>
-      <find>kajero-graph-2</find>
-      <find>kajero-graph-</find>
-      <find>kajero-graph</find>
-      <find>c</find>
       <find>css</find>
       <find>cs</find>
       <find>n</find>
       <find>map</find>
       <find>graphBlock</find>
-      <find>m</find>
       <find>mapBloc</find>
       <find>mapBlock</find>
+      <find>alert(&quot;kk&quot;);</find>
+      <find>m</find>
+      <find>move</find>
+      <find>moveBlockU</find>
+      <find>moveBlock</find>
+      <find>moveBlockUp</find>
+      <find>resultBlock</find>
+      <find>d</find>
+      <find>dispa</find>
+      <find>dispatch</find>
+      <find>CODE_EXECUTED</find>
+      <find>class=&quot;col-xs-12&quot;class=&quot;col-xs-12&quot;</find>
+      <find>class=&quot;col-xs-12&quot;</find>
+      <find>class=&quot;col-xs-12</find>
+      <find>col-xs-12</find>
+      <find>col-xs</find>
+      <find>col-x</find>
+      <find>col-</find>
+      <find>col</find>
+      <find>class=&quot;Documents&quot;</find>
+      <find>class=&quot;Documents</find>
+      <find>Documents</find>
+      <find>codeExecuted</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\estri\Desktop\base-master - copia</dir>
@@ -232,7 +216,6 @@
         <option value="$PROJECT_DIR$/imports/modules/document-importer.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/DocumentEditorV2.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/Footer.js" />
-        <option value="$PROJECT_DIR$/imports/ui/components/DocumentsList.js" />
         <option value="$PROJECT_DIR$/private/templates.json" />
         <option value="$PROJECT_DIR$/client/stylesheets/base/_grid.css" />
         <option value="$PROJECT_DIR$/imports/api/documents/documents.js" />
@@ -247,7 +230,6 @@
         <option value="$PROJECT_DIR$/imports/api/documents/server/users.js" />
         <option value="$PROJECT_DIR$/imports/ui/util.js" />
         <option value="$PROJECT_DIR$/imports/api/documents/server/publications.js" />
-        <option value="$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/TextBlock.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/AddControls.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/Content.js" />
@@ -263,6 +245,8 @@
         <option value="$PROJECT_DIR$/imports/ui/components/MapBlock.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/CodeBlock.js" />
         <option value="$PROJECT_DIR$/imports/ui/actions.js" />
+        <option value="$PROJECT_DIR$/imports/ui/components/DocumentsList.js" />
+        <option value="$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js" />
       </list>
     </option>
   </component>
@@ -1047,12 +1031,12 @@
       <workItem from="1508480805936" duration="6955000" />
       <workItem from="1508695210125" duration="1360000" />
       <workItem from="1508704185130" duration="6379000" />
-      <workItem from="1508739650593" duration="4553000" />
+      <workItem from="1508739650593" duration="9367000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="874416000" />
+    <option name="totallyTimeSpent" value="879230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1065,14 +1049,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780822" sideWeight="0.4970111" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32808024" sideWeight="0.49873015" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32772166" sideWeight="0.39726028" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27946126" sideWeight="0.4873551" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32772166" sideWeight="0.39989462" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27833894" sideWeight="0.48524764" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19985673" sideWeight="0.49873015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2014358" sideWeight="0.5029889" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32772166" sideWeight="0.60273975" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32772166" sideWeight="0.60010535" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24952015" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879657" sideWeight="0.49492064" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1133,13 +1118,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/EditDocument2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/api/documents/server/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1165,13 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="43" column="5" lean-forward="false" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1256,14 +1227,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1444,39 +1407,37 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/AppNavigation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/reducers/notebookReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1818">
-          <caret line="126" column="44" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/GraphBlock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="135" column="62" lean-forward="false" selection-start-line="135" selection-start-column="58" selection-end-line="135" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/Block.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="99" column="9" lean-forward="false" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/actions-spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="490" column="27" lean-forward="false" selection-start-line="490" selection-start-column="27" selection-end-line="490" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/reducers/notebookReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="126" column="44" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/AppNavigation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1486,11 +1447,16 @@
           <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1508743570931" expanded="true" signature="356:4203" ph="{...}" />
-            <marker date="1508743570931" expanded="true" signature="2710:4200" ph="{...}" />
-            <marker date="1508743570931" expanded="true" signature="3276:4183" ph="&lt;div/&gt;" />
-            <marker date="1508743570931" expanded="true" signature="3895:4007" ph="&lt;div/&gt;" />
-            <marker date="1508743570931" expanded="true" signature="4028:4139" ph="&lt;Visualiser/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/GraphBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="45" column="8" lean-forward="false" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1502,25 +1468,34 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#751#911#0" expanded="true" />
-            <marker date="1508743575219" expanded="true" signature="969:6428" ph="{...}" />
-            <marker date="1508743575219" expanded="true" signature="1835:1965" ph="{...}" />
-            <marker date="1508743575219" expanded="true" signature="5996:6404" ph="&lt;div/&gt;" />
-            <marker date="1508743575219" expanded="true" signature="5996:6421" ph="{...}" />
-            <marker date="1508743575219" expanded="true" signature="5996:6425" ph="{...}" />
-            <marker date="1508743575219" expanded="true" signature="6017:6088" ph="&lt;div/&gt;" />
-            <marker date="1508743575219" expanded="true" signature="6147:6324" ph="&lt;Visualiser/&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/actions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="147" column="10" lean-forward="false" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
+        <state relative-caret-position="338">
+          <caret line="219" column="19" lean-forward="true" selection-start-line="219" selection-start-column="19" selection-end-line="219" selection-end-column="19" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
             <element signature="e#252#351#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/DocumentsPublicList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
