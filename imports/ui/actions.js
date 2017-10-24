@@ -162,8 +162,6 @@ export function executeCodeBlock(id) {
             };
 
             if (graphElement) {
-              alert("1");
-
               //var mapContainerParent = graphElement.parentNode;
               //mapContainerParent.removeChild(graphElement);
               //var newMapContainer = document.createElement('div');
@@ -175,11 +173,14 @@ export function executeCodeBlock(id) {
 
               //graphElement = document.getElementById("kajero-graph-" + id);
               //
-
-              while(graphElement.firstChild)
-                graphElement.parentNode.removeChild(graphElement);
+              graphElement3 = document.getElementById("kajero-map-" + id);
+              if (graphElement3){
+                graphElement3.parentNode.removeChild(graphElement3);
+              }
+              //while(graphElement.firstChild)
+              //  graphElement.parentNode.removeChild(graphElement);
               var t = document.createElement('div');
-              t.setAttribute("id", "kajero-graph-" + id);
+              t.setAttribute("id", "kajero-map-" + id);
               t.setAttribute("class", "graphBlock");
               //t.innerHTML = response;
               graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
@@ -241,15 +242,29 @@ export function executeCodeBlock(id) {
             resolve(sResul);
           } catch (err) {
 
-            var mapContainerParent = graphElement.parentNode;
-            mapContainerParent.removeChild(graphElement);
-            var newMapContainer = document.createElement('div');
-            newMapContainer.setAttribute("id", "kajero-graph-" + id);
-            newMapContainer.setAttribute("className", "graphBlock");
-            newMapContainer.setAttribute("value", "map");
-            newMapContainer.innerHTML = "<i><small>Please, select a correct GeoJson as Datasource!</small></i>";
-            mapContainerParent.appendChild(newMapContainer);
+            //var mapContainerParent = graphElement.parentNode;
+            //mapContainerParent.removeChild(graphElement);
+            //var newMapContainer = document.createElement('div');
+            //newMapContainer.setAttribute("id", "kajero-graph-" + id);
+            //newMapContainer.setAttribute("className", "graphBlock");
+            //newMapContainer.setAttribute("value", "map");
+            //newMapContainer.innerHTML = "<i><small>Please, select a correct GeoJson as Datasource!</small></i>";
+            //mapContainerParent.appendChild(newMapContainer);
             //mapContainerParent.insertChildAtIndex(newMapContainer,2);
+
+            graphElement3 = document.getElementById("kajero-map-" + id);
+            if (graphElement3){
+              graphElement3.parentNode.removeChild(graphElement3);
+            }
+
+            var t = document.createElement('div');
+            t.setAttribute("id", "kajero-map-" + id);
+            t.setAttribute("class", "graphBlock");
+            t.innerHTML = "<i><small>Please, select a correct GeoJson as Datasource!</small></i>";
+            //t.innerHTML = response;
+            graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
+
+
 
             reject(err);
           }
@@ -504,10 +519,10 @@ export function deleteBlock(id) {
   };
 }
 export function moveBlockUp(id) {
-  graphElement = document.getElementById("kajero-graph-" + id);
-  if (graphElement) {
-    var mapContainerParent = graphElement.parentNode;
-    mapContainerParent.removeChild(graphElement);
+
+  graphElement3 = document.getElementById("kajero-map-" + id);
+  if (graphElement3){
+    graphElement3.parentNode.removeChild(graphElement3);
   }
 
   return {
@@ -517,12 +532,11 @@ export function moveBlockUp(id) {
 }
 export function moveBlockDown(id) {
 
-  graphElement = document.getElementById("kajero-graph-" + id);
-  if (graphElement) {
-    var mapContainerParent = graphElement.parentNode;
-    mapContainerParent.removeChild(graphElement);
-
+  graphElement3 = document.getElementById("kajero-map-" + id);
+  if (graphElement3){
+    graphElement3.parentNode.removeChild(graphElement3);
   }
+
   return {
     type: MOVE_BLOCK_DOWN,
     id
@@ -651,13 +665,17 @@ export function clearGraphData(id) {
 
 export function editBlock(id) {
 
-
+/*
   graphElement = document.getElementById("kajero-graph-" + id);
   if (graphElement) {
     var mapContainerParent = graphElement.parentNode;
     mapContainerParent.removeChild(graphElement.parentNode.childNodes[1]);
   }
-
+  */
+  graphElement3 = document.getElementById("kajero-map-" + id);
+  if (graphElement3){
+    graphElement3.parentNode.removeChild(graphElement3);
+  }
 
     /*
     alert("editBlock");

@@ -124,7 +124,7 @@ export default class Block extends Component {
           mapContainerParent.removeChild(graphElement);
         }
         */
-        alert(this.state.text);
+        //alert(this.state.text);
         return (
             <div className="edit-box" id={'edit-box-' + id} onClick={(e) => {e.stopPropagation()}}>
                 <Codemirror id={'codemirror-' + id} value={this.state.text} options={options}
