@@ -4,7 +4,7 @@ The OCT interactive stories tool is a webtool to help city stakeholders walk thr
 
 ### Demo
 A demo of the OCT interactive stories is accessible at [OCT interactive stories](http://lsivirtual.dlsi.uji.es/).  
-![CT interactive stories](/images/stories-catalog.jpg)
+![OCT interactive stories](/images/stories-tool-v2.png)
 
 ###License
 
