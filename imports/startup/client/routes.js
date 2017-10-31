@@ -42,6 +42,8 @@ Meteor.startup(() => {
   jsonTemplates = {};
   Meteor.subscribe('usersData');
 
+  $.getScript('/js/annotator.min.js', function() {});
+
   /*  Meteor.call('getFile', function(error, file){
    if(error){
    alert('Errorsss');

@@ -15,6 +15,7 @@ import { Card, CardBlock, Button, CardTitle, CardText, CardImg } from 'reactstra
 const handleNav = _id => browserHistory.push(`/documents/${_id}`);
 
 
+
 const DocumentsPublicList = ({documents}) => (
   documents.length > 0 ? <Grid><Row>
     {documents.map(({_id, title, published, owner, featured_image}) =>

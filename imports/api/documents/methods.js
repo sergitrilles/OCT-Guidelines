@@ -53,8 +53,6 @@ export const unpublishDocument = new ValidatedMethod({
   },
 });
 
-
-
 rateLimit({
   methods: [
     upsertDocument,

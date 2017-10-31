@@ -17,8 +17,6 @@ Meteor.methods({
   getFile : function(param){
     check(param, String);
 
-    console.log(param);
-
     var file = Assets.getText(param);
 
     return file;
@@ -30,6 +28,8 @@ Meteor.methods({
 
     return file;
   }
+
+
 });
 
 /*

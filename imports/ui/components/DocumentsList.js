@@ -10,16 +10,26 @@ import { parse } from './../markdown';
 
 import { Row, Col } from 'react-bootstrap';
 //import { AddDocument } from '../components/add-document.js';
-import { Grid } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap'
+
+import {userName} from '../util';
 
 const handleNav = _id => browserHistory.push(`/documents/${_id}`);
+
+const uniqueID = Meteor.userId();
+var emailUser = "";
+Meteor.userId();
+
+if (Meteor.user() ) {
+  emailUser = Meteor.user().emails[0].address;
+}
 
 const DocumentsList = ({ documents }) => (
 
   documents.length > 0 ? <ListGroup className="DocumentsList">
       {documents.map(({ _id, title, owner, body }) => (
 
-        Meteor.userId() == owner ?
+        (Meteor.userId() == owner) || (emailUser == "strilles@uji.es") ?
 
         <ListGroupItem key={ _id } onClick={ () => handleNav(_id) }>
           <b>{title}</b> - last update: {parse(body).get('metadata').get('created').toString()}

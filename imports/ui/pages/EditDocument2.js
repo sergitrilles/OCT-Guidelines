@@ -6,7 +6,9 @@ import DocumentEditor from '../components/DocumentEditorV2';
 import NotFound from './NotFound';
 import container from '../../modules/container';
 
+
 const EditDocument2 = ({ doc }) => (doc ? (
+
   <div className="EditDocument">
     <DocumentEditor doc={ doc }/>
   </div>

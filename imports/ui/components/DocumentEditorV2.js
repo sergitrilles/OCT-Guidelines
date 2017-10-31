@@ -126,6 +126,8 @@ class DocumentEditor extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+
   }
 
   openModal() {
@@ -223,7 +225,7 @@ class DocumentEditor extends React.Component {
         updated = true;
         //handleImporter({component: this, notebook: stateGlobal});
 
-       // handleImporter(stateGlobal);
+        // handleImporter(stateGlobal);
 
       };
 
@@ -245,12 +247,15 @@ class DocumentEditor extends React.Component {
 
 
 
-    stateGlobal = notebook;
+      stateGlobal = notebook;
     const {doc} = this.props;
     //const sampleNotebook = parse(doc.body);
     //alert(doc.body);
     //const editable = true;
     const metadata = parse(doc.body).get('metadata');
+    var emailUser = "";
+    if (Meteor.user())
+      emailUser = Meteor.user().emails[0].address;
 
     const saveView = (
       <div className="pure-u-1 pure-u-md-3-4 pure-u-lg-2-3">
@@ -260,8 +265,16 @@ class DocumentEditor extends React.Component {
 
     view = "";
 
+    var app = new annotator.App();
+    app.include(annotator.ui.main);
+    app.include(annotator.storage.http);
+    app
+      .start()
+      .then(function () {
+        app.annotations.load();
+      });
 
-    if (Meteor.userId() == doc.owner) {
+    if ((Meteor.userId() == doc.owner) || (emailUser == "strilles@uji.es")) {
 
       var publishButton = doc.published ? <Button onClick={ () => handleUnpublish(doc._id) }>Unpublish</Button> :
         <Button onClick={ () => handlePublish(doc._id) }>Publish</Button>;
@@ -311,16 +324,25 @@ class DocumentEditor extends React.Component {
       )
     }
     else {
+
+
       view = (
+
         <div className="ViewDocument">
 
           <Header editable={false}/>
+
           <hr className="top-sep"></hr>
-          <Content editable={false} activeBlock={activeBlock}/>
+
+            <Content editable={false} activeBlock={activeBlock}/>
+
+
           <Footer />
 
         </div>
+
       )
+
     }
 
     return (
