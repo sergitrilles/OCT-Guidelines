@@ -102,7 +102,7 @@
     "inferno": "^3.10.1",
     "inferno-component": "^3.10.1",
     "install": "^0.10.2",
-    "jquery": "^2.2.4",
+    "jquery": "^3.0.0",
     "jquery-validation": "^1.17.0",
     "jsdom": "^8.4.0",
     "json-loader": "^0.5.7",
