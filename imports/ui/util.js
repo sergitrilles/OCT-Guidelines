@@ -7,15 +7,17 @@ export function codeToText(codeBlock, includeOption) {
     result += codeBlock.get('language');
     const option = codeBlock.get('option');
     if (includeOption && option) {
-        const sep = '; ';
         result += '; ' + option;
+    }
+    const type = codeBlock.get('type');
+    if (includeOption && type) {
+      result += '; ' + type;
     }
     result += "\n";
     result += codeBlock.get('content');
     result += "\n```";
     return result;
 }
-
 
 export function highlight(str, lang) {
     if (lang && hljs.getLanguage(lang)) {

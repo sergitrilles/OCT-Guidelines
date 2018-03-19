@@ -71,10 +71,10 @@ const ViewDocument = ({ doc }) => {
   if (Meteor.user())
     emailUser = Meteor.user().emails[0].address;
   var link = "https://github.com/olahol/react-social/", facebookAppId = "7accd96295e614f9312867c48ed600c6", message = "Share!";
-  alert("Hola2");
+  //alert("Hola2");
 
     // script should be loaded and do something with it.
-  alert("Hola");
+  //alert("Hola");
   if(Meteor.userId() || (emailUser == "strilles@uji.es")) {
     return doc ? (
         <div className="ViewDocument">

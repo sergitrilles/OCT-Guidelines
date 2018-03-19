@@ -269,7 +269,7 @@ class MapBlock extends Block {
           <p>Select a Datasource (GeoJSON)</p>
           <Visualiser data={this.props.data} useHljs={true}
                       click={this.setDataPath}
-                      path='data'
+                      path='dadta'
                       name='data'
                       id={'visualiser-' + id}
           />

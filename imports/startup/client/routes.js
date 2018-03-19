@@ -19,6 +19,9 @@ import {Provider} from 'react-redux';
 import {createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
+import { WebApp } from 'meteor/webapp';
+
+
 import NotebookReducer from '../../ui/reducers';
 
 import Templates from './../../api/documents/templates';
@@ -35,6 +38,7 @@ const authenticate = (nextState, replace) => {
 
 
 Meteor.startup(() => {
+
   aux = "";
   stateGlobal = "";
   importer = false;

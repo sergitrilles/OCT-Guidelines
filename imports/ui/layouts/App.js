@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'react-bootstrap';
 import AppNavigation from '../components/AppNavigation';
+import AppFooter from '../components/AppFooter';
+
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -28,6 +30,8 @@ const App = ({ children }) => (
     <Grid>
       { children }
     </Grid>
+    <div style={{ margin: 0, padding: 50 }}></div>
+    <AppFooter />
   </div>
   </Provider>
 );

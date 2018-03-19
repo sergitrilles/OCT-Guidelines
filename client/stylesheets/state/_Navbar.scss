@@ -4,3 +4,16 @@
   color: #555;
   background-color: #e7e7e7;
 }
+
+.clear { clear: both; height: 100px; }
+
+.AppFooter {
+  padding: 1rem;
+  background-color: #f8f8f8;
+  color: #555;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

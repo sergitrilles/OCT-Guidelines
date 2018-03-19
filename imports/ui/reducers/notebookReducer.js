@@ -19,10 +19,14 @@ import {
   UNDO,
   CHANGE_CODE_BLOCK_OPTION,
   UPDATE_MAP_BLOCK_PROPERTY,
+  UPDATE_CONDITION_BLOCK_PROPERTY,
+  UPDATE_CONDITION_BLOCK_LABEL,
   UPDATE_GRAPH_BLOCK_PROPERTY,
   UPDATE_GRAPH_BLOCK_HINT,
   UPDATE_GRAPH_BLOCK_LABEL,
-  CLEAR_GRAPH_BLOCK_DATA
+  CLEAR_GRAPH_BLOCK_DATA,
+  UPDATE_P5_BLOCK_PROPERTY,
+  UPDATE_TEXT_BLOCK_LABEL
 } from '../actions';
 
 /*
@@ -43,6 +47,8 @@ export default function notebook(state = initialState, action) {
   const {id, text, field, blockType} = action;
   const content = state.get('content');
   let newState;
+
+  //alert(action.type);
 
   switch (action.type) {
     case GET_STATE:
@@ -67,10 +73,21 @@ export default function notebook(state = initialState, action) {
     case ADD_BLOCK:
       const newId = getNewId(content);
       let newBlock = {type: blockType, id: newId};
+
       if (blockType === 'code') {
         newBlock.content = '// New code block';
         newBlock.language = 'javascript';
         newBlock.option = 'runnable';
+        newBlock.condID = '';
+        newBlock.condValue = '';
+
+      }
+      else if (blockType === 'p5') {
+        newBlock.content = '// New p5 code block';
+        newBlock.language = 'javascript';
+        newBlock.option = 'runnable';
+        newBlock.condID = '';
+        newBlock.condValue = '';
       }
       else if (blockType === 'map') {
         newBlock.language = 'javascript';
@@ -101,8 +118,22 @@ export default function notebook(state = initialState, action) {
           x: '',
           y: ''
         });
-      } else {
+      }
+      else if (blockType === 'condition') {
+        newBlock.language = 'javascript';
+        newBlock.option = 'runnable';
+        newBlock.content = 'return condition.simple(data);';
+        newBlock.graphType = 'simple';
+        newBlock.dataPath = 'data';
+        newBlock.labels = Immutable.fromJS({
+          Condition: '',
+          Default: ''
+        });
+      }
+      else {
         newBlock.content = 'New text block';
+        newBlock.condID = '';
+        newBlock.condValue = '';
       }
       newState = handleChange(
         state, state.setIn(['blocks', newId], Immutable.fromJS(newBlock))
@@ -184,16 +215,61 @@ export default function notebook(state = initialState, action) {
         generateCode(newState.getIn(['blocks', id]))
       ));
 
+    case UPDATE_CONDITION_BLOCK_LABEL:
+      newState = state.setIn(
+        ['blocks', id, 'labels', action.label], action.value
+      );
+      return handleChange(state, newState.setIn(
+        ['blocks', id, 'content'],
+        generateCode(newState.getIn(['blocks', id]))
+      ));
+
+    case UPDATE_TEXT_BLOCK_LABEL:
+      newState = state.setIn(
+        ['blocks', id, 'labels', action.label], action.value
+      );
+      return handleChange(state, newState.setIn(
+        ['blocks', id, 'content'],
+        generateCode(newState.getIn(['blocks', id]))
+      ));
+
+    case UPDATE_CONDITION_BLOCK_PROPERTY:
+      newState = state.setIn(
+        ['blocks', id, action.property], action.value
+      );
+      return handleChange(state, newState.setIn(
+        ['blocks', id, 'content'],
+        generateCode(newState.getIn(['blocks', id]))
+      ));
+
     default:
       return state;
   }
 }
 
 function generateCode(block) {
+  //alert(block.get('type'));
+  if (block.get('type') === 'condition') {
+    return 'return condition.' + block.get('graphType') +
+      '(' + getLabels(block) + ');';
+  }
 
   if (block.get('graphType') === 'map') {
     return 'return map.' + block.get('graphType') +
       '(' + block.get('dataPath') + ');';
+  }
+
+  if (block.get('graphType') === 'simple') {
+    return 'return condition.' + block.get('graphType') +
+      '(' + block.get('dataPath') + ');';
+  }
+
+  if (block.get('type') === 'text') {
+
+    return getLabels(block) + ' ' + block.get('content');
+
+   // return 'return condition.' + block.get('graphType') +
+    //  '(' + getLabels(block) + ');';
   }
 
   return 'return graphs.' + block.get('graphType') +
@@ -203,6 +279,7 @@ function generateCode(block) {
 
 function getHints(block) {
   const hints = block.get('hints');
+  //alert(hints);
   const schema = Jutsu().__SMOLDER_SCHEMA[block.get('graphType')].data[0];
   const result = [];
   const keys = Object.keys(schema).sort();
@@ -220,6 +297,17 @@ function getHints(block) {
 }
 
 function getLabels(block) {
+  //alert(block);
+  //alert(block.get('graphType'));
+  const labels = block.get('labels');
+  if (block.get('type') === 'condition') {
+    const aux = [labels.get('Condition'), labels.get('Default')].map(
+      (label) => "'" + label + "'"
+    ).join(', ')
+    //alert("kkk");
+    return aux;
+  }
+
   if (block.get('graphType') === 'pieChart') {
     return '';
   }
@@ -227,7 +315,16 @@ function getLabels(block) {
   if (block.get('graphType') === 'map') {
     return '';
   }
-  const labels = block.get('labels');
+
+  if (block.get('type') === 'text'){
+    const aux = [labels.get('Condition'), labels.get('Default')].map(
+      (label) => "'" + label + "'"
+    ).join(', ')
+    //alert("kkk");
+    return aux;
+  }
+
+  //const labels = block.get('labels');
   return ', ' +
     [labels.get('x'), labels.get('y')].map(
       (label) => "'" + label + "'"

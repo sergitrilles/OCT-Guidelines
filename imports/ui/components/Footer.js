@@ -32,7 +32,7 @@ class Footer extends Component {
                 <hr className="footer-sep top-sep" />
                   <span className="footer-row">
                             <i className="fa fa-share-alt"></i>&nbsp;
-                            Share this GEO-C story!&nbsp;
+                            Share this GEO-C interactive guideline!&nbsp;
                             <FacebookButton title="Share via Facebook" message={message} media={mediaURL} appId={config.faceAPI} url={link} element="a" className="cs-fb">
                                 <i className="fa fa-facebook-official"/>
                             </FacebookButton>&nbsp;

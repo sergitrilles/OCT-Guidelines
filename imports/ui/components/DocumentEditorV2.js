@@ -265,14 +265,6 @@ class DocumentEditor extends React.Component {
 
     view = "";
 
-    var app = new annotator.App();
-    app.include(annotator.ui.main);
-    app.include(annotator.storage.http);
-    app
-      .start()
-      .then(function () {
-        app.annotations.load();
-      });
 
     if ((Meteor.userId() == doc.owner) || (emailUser == "strilles@uji.es")) {
 
@@ -304,7 +296,6 @@ class DocumentEditor extends React.Component {
                     <div>Try dropping some files here, or click to select files to upload.</div>
                   </Dropzone>
                   <ButtonGroup bsSize="small">
-
                     <Button onClick={this.closeModal}>Close</Button>
                   </ButtonGroup>
                 </Modal>
@@ -335,7 +326,6 @@ class DocumentEditor extends React.Component {
           <hr className="top-sep"></hr>
 
             <Content editable={false} activeBlock={activeBlock}/>
-
 
           <Footer />
 

@@ -7,4 +7,3 @@ import { BrowserPolicy } from 'meteor/browser-policy-common';
 BrowserPolicy.content.allowSameOriginForAll();
 BrowserPolicy.content.allowOriginForAll('*');
 BrowserPolicy.content.allowEval();
-

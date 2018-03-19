@@ -8,7 +8,11 @@ import {
 } from '../actions';
 
 
+import P5Wrapper from 'react-p5-wrapper';
+
 const md = new MarkdownIt({highlight});
+
+
 
 class CodeBlock extends Block {
 
@@ -102,20 +106,22 @@ class CodeBlock extends Block {
             buttons.unshift(optionButton);
             buttons.unshift(runButton);
         }
+
         return (
             <div className={'codeContainer' + containerClass} id={'codeContainer-' + id}>
                 <div className="codeBlock" id={'codeBlock-' + id}>
                     <div className="editor-buttons" id={'editor-buttons-' + id}>
                         {buttons}
                     </div>
+
                     <div onClick={this.enterEdit}
                         dangerouslySetInnerHTML={this.rawMarkup(block)}>
                     </div>
                 </div>
+
                 <div hidden={!hasBeenRun} className="graphBlock"
                     id={"kajero-graph-" + block.get('id')}>
                 </div>
-
                 {<div hidden={!hasBeenRun} className="resultBlock" id={'resultBlock-' + id}>
                     <div className="editor-buttons">
                         {hideBlock ? buttons : null}
@@ -125,6 +131,7 @@ class CodeBlock extends Block {
                         useHljs='true'
                         id={'visualiser-' + id}
                     />
+
                 </div>}
 
             </div>

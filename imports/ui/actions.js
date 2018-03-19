@@ -3,7 +3,6 @@ import Immutable from 'immutable';
 import L from 'leaflet';
 import bbox from 'turf-bbox';
 
-
 import reshaper from 'reshaper';
 import Smolder from 'smolder';
 import Jutsu from 'jutsu'; // Imports d3 and nv as globals
@@ -11,9 +10,15 @@ import Jutsu from 'jutsu'; // Imports d3 and nv as globals
 import {extractMarkdownFromHTML, extractMarkdownFromHTML_new, extractMarkdownFromDB} from './util';
 import {gistUrl, gistApi} from './config';
 
+import p5 from 'p5';
+
+import 'p5/lib/addons/p5.dom';
+import './components/p5.geolocation';
+
+import Mappa from 'mappa-mundi';
 
 import React from 'react';
-import 'leaflet/dist/leaflet.css'
+import 'leaflet/dist/leaflet.css';
 
 import {
   Map,
@@ -60,7 +65,16 @@ export const UPDATE_GRAPH_BLOCK_LABEL = 'UPDATE_GRAPH_BLOCK_LABEL';
 export const CLEAR_GRAPH_BLOCK_DATA = 'CLEAR_GRAPH_BLOCK_DATA';
 
 export const UPDATE_MAP_BLOCK_PROPERTY = 'UPDATE_MAP_BLOCK_PROPERTY';
+export const UPDATE_CONDITION_BLOCK_PROPERTY = 'UPDATE_CONDITION_BLOCK_PROPERTY';
+export const UPDATE_CONDITION_BLOCK_LABEL = 'UPDATE_CONDITION_BLOCK_LABEL';
 
+export const UPDATE_TEXT_BLOCK_LABEL = 'UPDATE_TEXT_BLOCK_LABEL';
+
+
+export const UPDATE_P5_BLOCK_PROPERTY = 'UPDATE_P5_BLOCK_PROPERTY';
+
+
+export const UPDATE_INPUT = 'UPDATE_INPUT';
 
 export const ADD_ITEM = 'ADD_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
@@ -69,6 +83,8 @@ export const RESET_ALL = 'RESET_ALL';
 export const SET_DATE = 'SET_DATE';
 
 var map;
+
+var resultP5;
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -131,10 +147,12 @@ export function executeCodeBlock(id) {
 
     const code = getState().notebook.getIn(['blocks', id, 'content']);
 
-    var sResul =""
+    var sResul = ""
     if (code) {
       var map_var = /map.map/;
       var graph = /graph/;
+      var condition = /condition/;
+      var p5block = /p5.setup/;
       var graphElement;
 
       var dataString = code.substring(code.lastIndexOf("(") + 1, code.lastIndexOf(")"));
@@ -152,8 +170,8 @@ export function executeCodeBlock(id) {
             var bounds;
             var bboxArray;
 
-              bboxArray = bbox(eval(dataString));
-              bounds = L.latLngBounds([[bboxArray[1], bboxArray[0]], [bboxArray[3], bboxArray[2]]]);
+            bboxArray = bbox(eval(dataString));
+            bounds = L.latLngBounds([[bboxArray[1], bboxArray[0]], [bboxArray[3], bboxArray[2]]]);
 
             var myStyle = {
               "color": "#ff0930",
@@ -162,19 +180,9 @@ export function executeCodeBlock(id) {
             };
 
             if (graphElement) {
-              //var mapContainerParent = graphElement.parentNode;
-              //mapContainerParent.removeChild(graphElement);
-              //var newMapContainer = document.createElement('div');
-              //newMapContainer.setAttribute("id", "kajero-graph-" + id);
-              //newMapContainer.setAttribute("class", "graphBlock");
-              //newMapContainer.setAttribute("value", "map");
-              //mapContainerParent.appendChild(newMapContainer);
-              //mapContainerParent.insertChildAtIndex(newMapContainer,2);
 
-              //graphElement = document.getElementById("kajero-graph-" + id);
-              //
               graphElement3 = document.getElementById("kajero-map-" + id);
-              if (graphElement3){
+              if (graphElement3) {
                 graphElement3.parentNode.removeChild(graphElement3);
               }
               //while(graphElement.firstChild)
@@ -185,12 +193,6 @@ export function executeCodeBlock(id) {
               //t.innerHTML = response;
               graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
               //graphElement.parentNode.appendChild()
-
-              /*
-              graphElement.innerHTML = "";
-              graphElement = document.createElement('div');
-              graphElement.setAttribute("id", "kajero-graph-" + id);
-              graphElement.setAttribute("class", "graphBlock");*/
 
               if (window['map' + id]) {
                 window['map' + id].off();
@@ -238,7 +240,7 @@ export function executeCodeBlock(id) {
               window['map' + id].invalidateSize();
             }, 10);
 
-            var sResul ="Map block"
+            var sResul = "Map block"
             resolve(sResul);
           } catch (err) {
 
@@ -253,7 +255,7 @@ export function executeCodeBlock(id) {
             //mapContainerParent.insertChildAtIndex(newMapContainer,2);
 
             graphElement3 = document.getElementById("kajero-map-" + id);
-            if (graphElement3){
+            if (graphElement3) {
               graphElement3.parentNode.removeChild(graphElement3);
             }
 
@@ -264,8 +266,6 @@ export function executeCodeBlock(id) {
             //t.innerHTML = response;
             graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
 
-
-
             reject(err);
           }
         })
@@ -274,7 +274,140 @@ export function executeCodeBlock(id) {
           ))
           .catch((err) => dispatch(codeError(id, err)));
       }
+      else if (code.match(p5block)) {
 
+        var refresh = false;
+
+        const functionP5 = "(function sketch(p5) { " + code + " })";
+
+        graphElement = document.getElementById("kajero-graph-" + id);
+        //document.getElementById("resultBlock-" + id).innerHTML = '';
+
+        if (graphElement) {
+
+
+
+          mappaElement = document.getElementById("mappa");
+
+          if (mappaElement) {
+            mappaElement.parentNode.removeChild(mappaElement);
+          }
+
+          canvasElement = document.getElementById("defaultCanvas0");
+
+          if (canvasElement) {
+            canvasElement.parentNode.removeChild(canvasElement);
+          }
+
+
+
+          graphElement3 = document.getElementById("kajero-p5-" + id);
+
+          if (graphElement3) {
+            refresh = true;
+            graphElement3.parentNode.removeChild(graphElement3);
+          }
+
+        /*  var t = document.createElement('div');
+          t.setAttribute("id", "kajero-p5-" + id);
+          t.setAttribute("class", "graphBlock");
+          graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
+*/
+        }
+
+  /*      graphElement3 = document.getElementById("kajero-p5-" + id);
+        if (graphElement3) {
+          alert("3");
+          graphElement3.parentNode.removeChild(graphElement3);
+        }
+
+        */
+
+        var t = document.createElement('div');
+        t.setAttribute("id", "kajero-p5-" + id);
+        t.setAttribute("class", "graphBlock");
+        t.setAttribute("style", "position: relative;");
+        graphElement.parentNode.insertBefore(t, graphElement.parentNode.childNodes[1]);
+
+
+
+
+        return new Promise((resolve, reject) => {
+          try {
+            if (refresh){
+              //const functionP5refresh = "(function sketch(p5) { " + code + " })";
+
+              if (resultP5 != null)
+              {
+                resultP5.remove();
+                resultP5 = null;
+              }
+
+              const skecthAux = eval(functionP5);
+              //test = new p5(skecthAux);
+
+              resultP5 = new p5(skecthAux, window.document.getElementById("kajero-p5-" + id) );
+
+              //const result = new p5(skecthAux, t);
+              //$("#mappa").detach().appendTo("kajero-p5-" + id);
+              resolve(resultP5);
+            }
+            else{
+              const skecthAux = eval(functionP5);
+              //test = new p5(skecthAux);
+              resultP5 = new p5(skecthAux, window.document.getElementById("kajero-p5-" + id) );
+
+              //const result = new p5(skecthAux, t);
+              //$("#mappa").detach().appendTo("kajero-p5-" + id);
+
+              var sResul = "P5 block"
+              resolve(sResul);
+
+            }
+
+          } catch (err) {
+            reject(err.toString);
+          }
+        })
+          .then((resultP5) => dispatch(
+            codeExecuted(id, resultP5, Immutable.fromJS(context))
+          ))
+          .catch((err) => dispatch(codeError(id, err)));
+      }
+      else if (code.match(condition)) {
+
+        var simple = /simple/;
+        var multiple = /multiple/;
+
+        return new Promise((resolve, reject) => {
+          try {
+
+            if (code.match(simple)) {
+              dataString = dataString.replace('/', '');
+              var fields = dataString.split(',');
+              //alert(dataString);
+              graphElement = document.getElementById("kajero-graph-" + id);
+              var i = 0;
+              if (graphElement) {
+                var newdiv = document.createElement('div');
+                var title = "hi";
+                newdiv.innerHTML = '<label for="check' + i + '">' + fields[0] + '</label>: <input type="text" id="check' + i + '" name="check' + i + '">';
+                graphElement.appendChild(newdiv);
+              }
+              var sResul = "Condition block"
+              resolve(sResul);
+            }
+          } catch (err) {
+
+            reject(err);
+          }
+        })
+          .then((result) => dispatch(
+            codeExecuted(id, result, Immutable.fromJS(context))
+          ))
+          .catch((err) => dispatch(codeError(id, err)));
+
+      }
       else {
         graphElement = document.getElementById("kajero-graph-" + id);
         const executionState = getState().execution;
@@ -307,14 +440,14 @@ export function executeCodeBlock(id) {
 }
 
 
-  Element.prototype.insertChildAtIndex = function(child, index) {
-    if (!index) index = 0
-    if (index >= this.children.length) {
-      this.appendChild(child)
-    } else {
-      this.insertBefore(child, this.children[index])
-    }
+Element.prototype.insertChildAtIndex = function (child, index) {
+  if (!index) index = 0
+  if (index >= this.children.length) {
+    this.appendChild(child)
+  } else {
+    this.insertBefore(child, this.children[index])
   }
+}
 
 /*
  export function executeCodeBlock(id) {
@@ -512,6 +645,23 @@ export function addMapBlock(id) {
     id
   };
 }
+export function addConditionBlock(id) {
+  return {
+    type: ADD_BLOCK,
+    blockType: 'condition',
+    id
+  };
+}
+
+export function addp5Block(id) {
+  return {
+    type: ADD_BLOCK,
+    blockType: 'p5',
+    id
+  };
+}
+
+
 export function deleteBlock(id) {
   return {
     type: DELETE_BLOCK,
@@ -521,7 +671,7 @@ export function deleteBlock(id) {
 export function moveBlockUp(id) {
 
   graphElement3 = document.getElementById("kajero-map-" + id);
-  if (graphElement3){
+  if (graphElement3) {
     graphElement3.parentNode.removeChild(graphElement3);
   }
 
@@ -533,7 +683,7 @@ export function moveBlockUp(id) {
 export function moveBlockDown(id) {
 
   graphElement3 = document.getElementById("kajero-map-" + id);
-  if (graphElement3){
+  if (graphElement3) {
     graphElement3.parentNode.removeChild(graphElement3);
   }
 
@@ -555,6 +705,15 @@ export function updateDatasource(id, url) {
     text: url
   };
 }
+
+export function updateInput(id, url) {
+  return {
+    type: UPDATE_INPUT,
+    id,
+    text: url
+  };
+}
+
 export function toggleSave() {
   return {
     type: TOGGLE_SAVE
@@ -611,6 +770,15 @@ export function updateGraphType(id, graph) {
   };
 }
 
+export function updateConditionType(id, graph) {
+  return {
+    type: UPDATE_C_BLOCK_PROPERTY,
+    id: id,
+    property: 'graphType',
+    value: graph
+  };
+}
+
 export function updateGraphDataPath(id, path) {
   return {
     type: UPDATE_GRAPH_BLOCK_PROPERTY,
@@ -647,6 +815,42 @@ export function updateGraphLabel(id, label, value) {
   };
 }
 
+export function updateConditionLabel(id, label, value) {
+  return {
+    type: UPDATE_CONDITION_BLOCK_LABEL,
+    id,
+    label,
+    value
+  };
+}
+
+export function updateTextLabel(id, label, value) {
+  return {
+    type: UPDATE_TEXT_BLOCK_LABEL,
+    id,
+    label,
+    value
+  };
+}
+
+export function compileConditionBlock(id) {
+  return {
+    type: UPDATE_CONDITION_BLOCK_PROPERTY,
+    id: id,
+    property: 'type',
+    value: 'condition'
+  };
+}
+
+export function compilep5Block(id) {
+  return {
+    type: UPDATE_P5_BLOCK_PROPERTY,
+    id: id,
+    property: 'type',
+    value: 'p5'
+  };
+}
+
 export function compileGraphBlock(id) {
   return {
     type: UPDATE_GRAPH_BLOCK_PROPERTY,
@@ -665,43 +869,43 @@ export function clearGraphData(id) {
 
 export function editBlock(id) {
 
-/*
-  graphElement = document.getElementById("kajero-graph-" + id);
-  if (graphElement) {
-    var mapContainerParent = graphElement.parentNode;
-    mapContainerParent.removeChild(graphElement.parentNode.childNodes[1]);
-  }
-  */
+  /*
+   graphElement = document.getElementById("kajero-graph-" + id);
+   if (graphElement) {
+   var mapContainerParent = graphElement.parentNode;
+   mapContainerParent.removeChild(graphElement.parentNode.childNodes[1]);
+   }
+   */
   graphElement3 = document.getElementById("kajero-map-" + id);
-  if (graphElement3){
+  if (graphElement3) {
     graphElement3.parentNode.removeChild(graphElement3);
   }
 
-    /*
-    alert("editBlock");
-    graphElement = document.getElementById("kajero-graph-" + id);
-    if (graphElement && (graphElement.getAttribute('value')=="map")){
-      var mapContainerParent = graphElement.parentNode;
-      mapContainerParent.removeChild(graphElement);
-      var newMapContainer = document.createElement('div');
-      newMapContainer.setAttribute("id", "kajero-graph-" + id);
-      newMapContainer.setAttribute("hidden", true);
-      newMapContainer.setAttribute("className", "graphBlock");
-      newMapContainer.setAttribute("value", "map");
-      mapContainerParent.appendChild(newMapContainer);
-    }
-    graphElement = document.getElementById("resultBlock-" + id);
-    if (graphElement && (graphElement.getAttribute('value')=="map")){
-      var mapContainerParent = graphElement.parentNode;
-      mapContainerParent.removeChild(graphElement);
-      var newMapContainer = document.createElement('div');
-      newMapContainer.setAttribute("id", "resultBlock-" + id);
-      newMapContainer.setAttribute("hidden", true);
-      newMapContainer.setAttribute("className", "resultBlock");
-      newMapContainer.setAttribute("value", "map");
-      mapContainerParent.appendChild(newMapContainer);
-    }
-    */
+  /*
+   alert("editBlock");
+   graphElement = document.getElementById("kajero-graph-" + id);
+   if (graphElement && (graphElement.getAttribute('value')=="map")){
+   var mapContainerParent = graphElement.parentNode;
+   mapContainerParent.removeChild(graphElement);
+   var newMapContainer = document.createElement('div');
+   newMapContainer.setAttribute("id", "kajero-graph-" + id);
+   newMapContainer.setAttribute("hidden", true);
+   newMapContainer.setAttribute("className", "graphBlock");
+   newMapContainer.setAttribute("value", "map");
+   mapContainerParent.appendChild(newMapContainer);
+   }
+   graphElement = document.getElementById("resultBlock-" + id);
+   if (graphElement && (graphElement.getAttribute('value')=="map")){
+   var mapContainerParent = graphElement.parentNode;
+   mapContainerParent.removeChild(graphElement);
+   var newMapContainer = document.createElement('div');
+   newMapContainer.setAttribute("id", "resultBlock-" + id);
+   newMapContainer.setAttribute("hidden", true);
+   newMapContainer.setAttribute("className", "resultBlock");
+   newMapContainer.setAttribute("value", "map");
+   mapContainerParent.appendChild(newMapContainer);
+   }
+   */
   return {
     type: EDIT_BLOCK,
     id

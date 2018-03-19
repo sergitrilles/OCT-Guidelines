@@ -16,15 +16,18 @@ function extractCodeBlock(token) {
   const info = token.info.split(';').map(s => s.trim());
   const language = info[0] || undefined;
   const option = info[1] || undefined;
+  const type = info[2] || undefined;
   if (['runnable', 'auto', 'hidden'].indexOf(option) < 0) {
+    alert("HI");
     // If not an executable block, we just want to represent as Markdown.
     return null;
   }
   return Immutable.fromJS({
-    type: 'code',
+    type: type,
     content: token.content.trim(),
     language,
-    option
+    option,
+
   });
 }
 
@@ -42,7 +45,8 @@ function flushTextBlock(counter, blocks, blockOrder, text) {
 }
 
 function extractBlocks(md) {
-  const rgx = /(```\w+;\s*?(?:runnable|auto|hidden)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
+  //const rgx = /(```\w+;\s*?(?:runnable|auto|hidden)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
+  const rgx = /(```\w+;\s*?(?:runnable|auto|hidden);\s*?(?:code|p5)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
   const parts = md.split(rgx);
 
   let blockCounter = 0;
@@ -52,9 +56,13 @@ function extractBlocks(md) {
 
   for (let i = 0; i < parts.length; i++) {
 
+
     const part = parts[i];
-    const tokens = markdownIt.parse(parts[i]);
+
+    const tokens = markdownIt.parse(parts[i], {});
+
     if (tokens.length === 1 && tokens[0].type === 'fence') {
+
       const block = extractCodeBlock(tokens[0]);
       // If it's an executable block
       if (block) {

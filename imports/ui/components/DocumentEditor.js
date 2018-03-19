@@ -104,7 +104,7 @@ class DocumentEditor extends React.Component {
 
   render() {
     editable = true;
-    const {  saving, activeBlock } = this.props.edit;
+    const { saving, activeBlock } = this.props.edit;
     const cssClass = editable ? ' editable' : '';
     const { notebook } = this.props;
 

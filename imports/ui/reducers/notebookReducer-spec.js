@@ -376,7 +376,7 @@ describe('notebook reducer', () => {
                     option: 'runnable',
                     graphType: 'pieChart',
                     dataPath: 'data',
-                    content: 'return graphs.pieChart(data);',
+                    content: 'return graphs.single(data);',
                     hints: {
                         x: '', y: '', label: '', value: ''
                     },
