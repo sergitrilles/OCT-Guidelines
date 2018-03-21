@@ -146,7 +146,7 @@ export default class Block extends Component {
       return this.renderViewerMode();
     }
     //alert("EDIT0");
-    const isCodeBlock = (block.get('type') === 'code' || block.get('type') === 'p5' );
+    const isCodeBlock = (block.get('type') === ( 'code' || 'p5' || 'map' ));
     const id = this.props.block.get('id');
     const options = {
       mode: isCodeBlock ? 'javascript' : 'markdown',

@@ -47,9 +47,6 @@ export default class AddControls extends Component {
         <i className="fa fa-flag clickable" onClick={this.addp5Block}
            title="New p5 block">
         </i>
-        <i className="fa fa-sliders clickable" onClick={this.addConditionBlock}
-           title="New condition block">
-        </i>
         <i className="fa fa-map-o clickable" onClick={this.addMapBlock}
            title="New map block">
         </i>

@@ -16,14 +16,22 @@ function extractCodeBlock(token) {
   const info = token.info.split(';').map(s => s.trim());
   const language = info[0] || undefined;
   const option = info[1] || undefined;
-  const type = info[2] || undefined;
+
+  typeBlock =  undefined;
+
+  if (info[2] == "map" )
+  {typeBlock = "code";}
+  else if(info[2] == "graph" )
+  {typeBlock = "code";}
+  else
+  {typeBlock = info[2] || undefined;}
+
   if (['runnable', 'auto', 'hidden'].indexOf(option) < 0) {
-    alert("HI");
     // If not an executable block, we just want to represent as Markdown.
     return null;
   }
   return Immutable.fromJS({
-    type: type,
+    type: typeBlock,
     content: token.content.trim(),
     language,
     option,
@@ -46,7 +54,7 @@ function flushTextBlock(counter, blocks, blockOrder, text) {
 
 function extractBlocks(md) {
   //const rgx = /(```\w+;\s*?(?:runnable|auto|hidden)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
-  const rgx = /(```\w+;\s*?(?:runnable|auto|hidden);\s*?(?:code|p5)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
+  const rgx = /(```\w+;\s*?(?:runnable|auto|hidden);\s*?(?:code|p5|map)\s*?[\n\r]+[\s\S]*?^\s*?```\s*?$)/gm;
   const parts = md.split(rgx);
 
   let blockCounter = 0;

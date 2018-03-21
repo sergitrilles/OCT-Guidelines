@@ -1,61 +1,25 @@
-import React from 'react';
-import MarkdownIt from 'markdown-it';
-import Block from './Block';
-import {highlight} from '../util';
+import React from "react";
+import MarkdownIt from "markdown-it";
+import Block from "./Block";
+import { codeToText, highlight } from '../util';
 
-import ReactDOM from 'react-dom';
+import {connect} from "react-redux";
+import Visualiser from "./visualiser/Visualiser";
+import {dataSelector} from "../selectors";
 
-import {connect} from 'react-redux';
+import "leaflet/dist/leaflet.css";
+import Jutsu from "jutsu";
 
-import SelectionPopover from 'react-selection-popover'
-
-import Immutable from 'immutable';
-
-import CodeBlock from './CodeBlock';
-import Visualiser from './visualiser/Visualiser';
-import {dataSelector} from '../selectors';
-
-import 'leaflet/dist/leaflet.css'
-
-import Jutsu from 'jutsu';
-
-import bbox from 'turf-bbox';
-
-import turf from 'turf-isvalid';
-
-import {
-  executeCodeBlock, updateGraphType,
-  updateMapDataPath, updateGraphHint,
-  updateGraphLabel, compileGraphBlock
-} from '../actions';
+import {compileGraphBlock, executeCodeBlock, updateGraphHint, updateMapDataPath} from "../actions";
+import {Overlay} from "react-leaflet";
 
 const md = new MarkdownIt({highlight, html: true});
-
-import {
-  Map,
-  Marker,
-  Popup,
-  TileLayer,
-  ZoomControl,
-  Circle,
-  Rectangle,
-  FeatureGroup,
-  Overlay,
-  Polyline,
-  GeoJSON,
-
-} from 'react-leaflet';
-import axios from 'axios';
 
 class MapBlock extends Block {
 
   constructor(props) {
     super(props);
-    /*
-     this.state = {
-     showHintDialog: Immutable.Map()
-     };
-     */
+
     this.getCssClass = this.getCssClass.bind(this);
     this.setDataPath = this.setDataPath.bind(this);
     //this.getHintInputs = this.getHintInputs.bind(this);
@@ -65,6 +29,13 @@ class MapBlock extends Block {
     this.updateMap = this.updateMap.bind(this);
     this.toggleHintDialog = this.toggleHintDialog.bind(this);
     this.saveAsCode = this.saveAsCode.bind(this);
+
+    this.clickPlay = this.clickPlay.bind(this);
+    this.clickOption = this.clickOption.bind(this);
+    this.getRunButton = this.getRunButton.bind(this);
+    this.getOptionButton = this.getOptionButton.bind(this);
+
+
     this.smolderSchema = Jutsu().__SMOLDER_SCHEMA;
     this.needsRerun = false;
 
@@ -88,16 +59,65 @@ class MapBlock extends Block {
   }
 
   setDataPath(_, path) {
-
     const {dispatch, block} = this.props;
     dispatch(updateMapDataPath(block.get('id'), path));
+  }
 
+  clickPlay() {
+    const {dispatch, block} = this.props;
+    dispatch(executeCodeBlock(block.get('id')));
+  }
+
+  clickOption() {
+    const {dispatch, block} = this.props;
+    dispatch(changeCodeBlockOption(block.get('id')));
+  }
+
+  getOptionButton() {
+    const option = this.props.block.get('option');
+    if (!this.props.editable) {
+      return null;
+    }
+    let icon, text;
+    switch (option) {
+      case 'runnable':
+        icon = 'users';
+        text = 'Code is run by readers, by clicking the play button.';
+        break;
+      case 'auto':
+        icon = 'gear';
+        text = 'Code is run when the notebook is loaded.';
+        break;
+      case 'hidden':
+        icon = 'user-secret';
+        text = 'Code is run when the notebook is loaded, and only the results are displayed.';
+        break;
+      default:
+        return null;
+    }
+    return (
+      <i className={"fa fa-" + icon} onClick={this.clickOption}
+         key="option" title={text}>
+      </i>
+    );
+  }
+
+  getRunButton() {
+    const option = this.props.block.get('option');
+    const icon = this.props.hasBeenRun ? "fa-refresh" : "fa-play-circle-o";
+    const showIconOptions = ['runnable', 'auto', 'hidden'];
+    if (showIconOptions.indexOf(option) > -1) {
+      return (
+        <i className={"fa " + icon} onClick={this.clickPlay} key="run"
+           title={this.props.hasBeenRun ? "Re-run code" : "Run code"}>
+        </i>
+      );
+    }
   }
 
   componentDidMount() {
     this.props.dispatch(executeCodeBlock(this.props.block.get('id')));
     this.selectedData = this.props.data;
-
   }
 
   componentWillReceiveProps(newProps) {
@@ -112,7 +132,6 @@ class MapBlock extends Block {
       this.selectedData = new Function(
         ['data'], 'return ' + newBlock.get('dataPath')
       ).call({}, newProps.data);
-
     }
   }
 
@@ -124,11 +143,8 @@ class MapBlock extends Block {
   }
 
   updateHint(hint) {
-
     const value = this.refs['set-' + hint].value;
     this.setHint(hint, value, true);
-
-
   }
 
   setHint(hint, value, dontUpdateInput) {
@@ -137,19 +153,14 @@ class MapBlock extends Block {
     if (!dontUpdateInput) {
       this.refs['set-' + hint].value = value;
     }
-
   }
 
   updateMap(axis) {
-
     const {dispatch, block} = this.props;
     dispatch(updateMapDataPath(block.get('id'), path));
-
     this.setState({
       zoom: value
     });
-
-
   }
 
   toggleHintDialog(hint) {
@@ -158,7 +169,12 @@ class MapBlock extends Block {
         hint, !this.state.showHintDialog.get(hint)
       )
     });
+  }
 
+  rawMarkup(codeBlock) {
+    return {
+      __html: md.render(codeToText(codeBlock))
+    };
   }
 
   saveAsCode() {
@@ -208,6 +224,52 @@ class MapBlock extends Block {
     );
   }
 
+  renderViewerMode() {
+
+    const {block, hasBeenRun, result, editable} = this.props;
+
+    let buttons = this.getButtons();
+    const runButton = this.getRunButton();
+    const optionButton = this.getOptionButton();
+    const hideBlock = !editable && block.get('option') === 'hidden';
+    const containerClass = hideBlock ? ' hiddenCode' : '';
+    const id = block.get('id');
+    if (buttons == null) {
+      buttons = [runButton, optionButton];
+    } else {
+      buttons.unshift(optionButton);
+      buttons.unshift(runButton);
+    }
+
+    return (
+      <div className={'codeContainer' + containerClass} id={'codeContainer-' + id}>
+        <div className="codeBlock" id={'codeBlock-' + id}>
+          <div className="editor-buttons" id={'editor-buttons-' + id}>
+            {buttons}
+          </div>
+
+          <div onClick={this.enterEdit}
+               dangerouslySetInnerHTML={this.rawMarkup(block)}>
+          </div>
+        </div>
+
+        <div hidden={!hasBeenRun} className="graphBlock"
+             id={"kajero-graph-" + block.get('id')}>
+        </div>
+        {<div hidden={!hasBeenRun} className="resultBlock" id={'resultBlock-' + id}>
+          <div className="editor-buttons">
+            {hideBlock ? buttons : null}
+          </div>
+          <Visualiser
+            data={result}
+            useHljs='true'
+            id={'visualiser-' + id}
+          />
+        </div>}
+      </div>
+    );
+  }
+
   // /*{this.getPointZoomInputs()}*/
 
   render() {
@@ -234,9 +296,7 @@ class MapBlock extends Block {
     this.layerIndex = this.layerIndex + 1;
     boundsNew = [0.0, 0.0];
     try {
-
       return (
-
         <div className="graph-creator">
           <div className="editor-buttons">
             {buttons}
@@ -258,9 +318,9 @@ class MapBlock extends Block {
       );
 
     }
-    catch(err){
+    catch (err) {
       console.log(err.message);
-      return(
+      return (
         <div className="graph-creator">
           <div className="editor-buttons">
             {buttons}
@@ -269,7 +329,7 @@ class MapBlock extends Block {
           <p>Select a Datasource (GeoJSON)</p>
           <Visualiser data={this.props.data} useHljs={true}
                       click={this.setDataPath}
-                      path='dadta'
+                      path='data'
                       name='data'
                       id={'visualiser-' + id}
           />

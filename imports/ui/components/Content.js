@@ -33,6 +33,7 @@ class Content extends Component {
                      id={block.get('id')} editable={editable}/>
       );
 
+      //alert(block.get('type'));
       switch (block.get('type')) {
         case 'text':
           blocks.push(
@@ -43,6 +44,7 @@ class Content extends Component {
           );
           break;
         case 'condition':
+
           hasBeenRun = blocksExecuted.includes(id);
           result = results.get(id);
           BlockClass = ConditionBlock;
