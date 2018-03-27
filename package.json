@@ -1,7 +1,7 @@
 {
-  "name": "application-name",
+  "name": "Guidelines",
   "version": "1.0.0",
-  "description": "Application description.",
+  "description": "Guidelines - GEO-C.",
   "license": "MIT",
   "scripts": {
     "start": "meteor --settings settings-development.json",

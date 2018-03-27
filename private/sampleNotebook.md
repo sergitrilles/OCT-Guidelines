@@ -21,7 +21,7 @@ print "Non-runnable code sample"
 
 And finally a runnable one...
 
-```javascript; runnable
+```javascript; runnable; code
 console.log("Runnable");
 ```
 
